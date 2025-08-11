@@ -102,7 +102,7 @@ Para executar os testes:
 flutter test
 ```
 
-## 📱 Plataformas Suportadas
+## 📱 Dispositivos suportados
 
 - ✅ Android
 - ✅ iOS
