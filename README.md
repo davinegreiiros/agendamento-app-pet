@@ -106,10 +106,6 @@ flutter test
 
 - ✅ Android
 - ✅ iOS
-- ✅ Web
-- ✅ Windows
-- ✅ macOS
-- ✅ Linux
 
 ## 🤝 Contribuição
 
