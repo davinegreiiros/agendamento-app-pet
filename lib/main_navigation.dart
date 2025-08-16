@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'pet_flow/home/home_page.dart';
@@ -58,21 +60,27 @@ class _MainNavigationState extends State<MainNavigation> {
           items: [
             BottomNavigationBarItem(
               icon: PhosphorIcon(
-                _currentIndex == 0 ? PhosphorIcons.house(PhosphorIconsStyle.fill) : PhosphorIcons.house(),
+                _currentIndex == 0
+                    ? PhosphorIcons.house(PhosphorIconsStyle.fill)
+                    : PhosphorIcons.house(),
                 size: 24,
               ),
               label: 'Home',
             ),
             BottomNavigationBarItem(
               icon: PhosphorIcon(
-                _currentIndex == 1 ? PhosphorIcons.user(PhosphorIconsStyle.fill) : PhosphorIcons.user(),
+                _currentIndex == 1
+                    ? PhosphorIcons.user(PhosphorIconsStyle.fill)
+                    : PhosphorIcons.user(),
                 size: 24,
               ),
               label: 'Conta',
             ),
             BottomNavigationBarItem(
               icon: PhosphorIcon(
-                _currentIndex == 2 ? PhosphorIcons.dog(PhosphorIconsStyle.fill) : PhosphorIcons.dog(),
+                _currentIndex == 2
+                    ? PhosphorIcons.dog(PhosphorIconsStyle.fill)
+                    : PhosphorIcons.dog(),
                 size: 24,
               ),
               label: 'Cachorro',

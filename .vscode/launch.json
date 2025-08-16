@@ -6,18 +6,18 @@
     "configurations": [
         
         {
-            "name": "daviteste",
+            "name": "agendamentoPetApp DEV",
             "request": "launch",
             "type": "dart"
         },
         {
-            "name": "daviteste (profile mode)",
+            "name": "agendamentoPetApp HMG",
             "request": "launch",
             "type": "dart",
             "flutterMode": "profile"
         },
         {
-            "name": "daviteste (release mode)",
+            "name": "agendamentoPetApp PROD release",
             "request": "launch",
             "type": "dart",
             "flutterMode": "release"
