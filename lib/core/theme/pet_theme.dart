@@ -20,11 +20,9 @@ class PetTheme {
         primary: primary,
         secondary: primaryDark,
         surface: surface,
-        background: background,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: accent,
-        onBackground: accent,
       ),
       textTheme: GoogleFonts.interTextTheme().apply(
         bodyColor: accent,
@@ -83,4 +81,3 @@ class PetTheme {
         color: textSecondary,
       );
 }
-

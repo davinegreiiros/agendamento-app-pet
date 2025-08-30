@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'core/theme/pet_theme.dart';
+import 'shared/presentation/theme/app_theme.dart';
 import 'pet_flow/onboarding/onboarding_page.dart';
-import 'pet_flow/auth/login_page.dart';
+import 'features/auth/presentation/pages/login_page.dart';
 import 'main_navigation.dart';
 
 class PetApp extends StatelessWidget {
@@ -12,7 +12,7 @@ class PetApp extends StatelessWidget {
     return MaterialApp(
       title: 'Agenda Pet Saúde',
       debugShowCheckedModeBanner: false,
-      theme: PetTheme.lightTheme,
+      theme: AppTheme.lightTheme,
       initialRoute: OnboardingPage.route,
       routes: {
         OnboardingPage.route: (_) => const OnboardingPage(),
