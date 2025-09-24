@@ -130,7 +130,8 @@ class HomePage extends StatelessWidget {
         color: backgroundColor,
         borderRadius: BorderRadius.circular(16),
         border: Border.all(
-          color: iconColor?.withOpacity(0.2) ?? Colors.grey.withOpacity(0.2),
+          color: iconColor?.withValues(alpha: 0.2) ??
+              Colors.grey.withValues(alpha: 0.2),
         ),
       ),
       child: Column(

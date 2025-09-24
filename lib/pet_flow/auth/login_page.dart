@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Icon(Icons.pets,
-                    size: 36, color: darkText.withOpacity(0.85)),
+                    size: 36, color: darkText.withValues(alpha: 0.85)),
               ),
               const SizedBox(height: 8),
 
@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                             BorderRadius.circular(32), // mais arredondado
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.08),
+                            color: Colors.black.withValues(alpha: 0.08),
                             blurRadius: 18,
                             offset: const Offset(0, 10),
                             spreadRadius: 1,

@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Icon(
                 Icons.pets,
                 size: 36,
-                color: const Color(0xFF2C2C2C).withOpacity(0.85),
+                color: const Color(0xFF2C2C2C).withValues(alpha: 0.85),
               ),
             ),
             const SizedBox(height: 8),
