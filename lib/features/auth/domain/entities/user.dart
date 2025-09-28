@@ -1,21 +1,21 @@
 import 'package:equatable/equatable.dart';
 
 class User extends Equatable {
+  const User({
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.createdAt,
+    required this.updatedAt,
+    this.profileImageUrl,
+  });
+
   final String id;
   final String name;
   final String email;
   final String? profileImageUrl;
   final DateTime createdAt;
   final DateTime updatedAt;
-
-  const User({
-    required this.id,
-    required this.name,
-    required this.email,
-    this.profileImageUrl,
-    required this.createdAt,
-    required this.updatedAt,
-  });
 
   @override
   List<Object?> get props => [
@@ -34,14 +34,13 @@ class User extends Equatable {
     String? profileImageUrl,
     DateTime? createdAt,
     DateTime? updatedAt,
-  }) {
-    return User(
-      id: id ?? this.id,
-      name: name ?? this.name,
-      email: email ?? this.email,
-      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
-      createdAt: createdAt ?? this.createdAt,
-      updatedAt: updatedAt ?? this.updatedAt,
-    );
-  }
+  }) =>
+      User(
+        id: id ?? this.id,
+        name: name ?? this.name,
+        email: email ?? this.email,
+        profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+        createdAt: createdAt ?? this.createdAt,
+        updatedAt: updatedAt ?? this.updatedAt,
+      );
 }

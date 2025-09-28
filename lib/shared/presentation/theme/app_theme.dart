@@ -13,11 +13,9 @@ class AppTheme {
         primary: AppColors.primary,
         secondary: AppColors.primaryDark,
         surface: AppColors.surface,
-        background: AppColors.background,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: AppColors.textPrimary,
-        onBackground: AppColors.textPrimary,
         error: AppColors.error,
         onError: Colors.white,
       ),
@@ -127,7 +125,7 @@ class AppTheme {
         ),
       ),
       chipTheme: ChipThemeData(
-        backgroundColor: AppColors.primary.withOpacity(0.15),
+        backgroundColor: AppColors.primary.withValues(alpha: 0.15),
         selectedColor: AppColors.primary,
         labelStyle: const TextStyle(color: AppColors.textPrimary),
         secondaryLabelStyle: const TextStyle(color: Colors.white),
@@ -136,10 +134,10 @@ class AppTheme {
           borderRadius: BorderRadius.circular(20),
         ),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: AppColors.surface,
         elevation: 2,
-        shadowColor: Colors.black.withOpacity(0.1),
+        shadowColor: Colors.black.withValues(alpha: 0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),
         ),

@@ -1,11 +1,20 @@
+// ignore_for_file: prefer_relative_imports
+import 'package:agendamento_pet_app/core/constants/app_constants.dart';
+import 'package:agendamento_pet_app/core/validators/validators.dart';
+import 'package:agendamento_pet_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:agendamento_pet_app/features/auth/presentation/bloc/auth_state.dart';
+import 'package:agendamento_pet_app/features/auth/presentation/widgets/auth_scaffold.dart';
+import 'package:agendamento_pet_app/features/auth/presentation/widgets/custom_text_field.dart';
+
+import 'package:agendamento_pet_app/shared/constants/app_routes.dart';
+import 'package:agendamento_pet_app/shared/presentation/widgets/buttons/index.dart';
 import 'package:flutter/material.dart';
-import '../../../../shared/presentation/widgets/buttons/index.dart';
-import '../widgets/custom_text_field.dart';
-import '../widgets/auth_scaffold.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class LoginPage extends StatefulWidget {
-  static const String route = '/login';
   const LoginPage({super.key});
+
+  static const String route = AppRoutes.login;
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -15,7 +24,6 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -24,192 +32,181 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _handleGoogleSignIn() {
-    // TODO: Implementar login com Google
-    debugPrint('Google Sign In pressed');
+  void _handleGoogleSignIn(BuildContext context) {
+    context.read<AuthBloc>().add(const SignInWithGoogleRequested());
   }
 
-  void _handleFacebookSignIn() {
-    // TODO: Implementar login com Facebook
-    debugPrint('Facebook Sign In pressed');
+  void _handleFacebookSignIn(BuildContext context) {
+    context.read<AuthBloc>().add(const SignInWithFacebookRequested());
   }
 
-  void _handleEmailSignIn() {
+  void _handleEmailSignIn(BuildContext context) {
     if (_formKey.currentState?.validate() ?? false) {
-      setState(() => _isLoading = true);
-
-      // TODO: Implementar login com email
-      Future.delayed(const Duration(seconds: 2), () {
-        if (mounted) {
-          setState(() => _isLoading = false);
-          Navigator.pushReplacementNamed(context, '/main');
-        }
-      });
+      context.read<AuthBloc>().add(
+            SignInWithEmailRequested(
+              email: _emailController.text.trim(),
+              password: _passwordController.text,
+            ),
+          );
     }
   }
 
-  void _handleSignUp() {
-    // TODO: Navegar para tela de cadastro
-    debugPrint('Sign Up pressed');
+  void _handleSignUp(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.register);
   }
 
-  void _handleForgotPassword() {
-    // TODO: Implementar recuperação de senha
-    debugPrint('Forgot Password pressed');
+  void _handleForgotPassword(BuildContext context) {
+    Navigator.pushNamed(context, AppRoutes.forgotPassword);
   }
 
   @override
-  Widget build(BuildContext context) {
-    return AuthScaffold(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            // Ícone topo esquerdo (pata)
-            Align(
-              alignment: Alignment.topLeft,
-              child: Icon(
-                Icons.pets,
-                size: 36,
-                color: const Color(0xFF2C2C2C).withOpacity(0.85),
+  Widget build(BuildContext context) => BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
               ),
+            );
+          } else if (state is AuthAuthenticated) {
+            Navigator.pushReplacementNamed(context, AppRoutes.main);
+          }
+        },
+        child: AuthScaffold(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(
+              horizontal: AppSpacing.lg,
+              vertical: AppSpacing.md,
             ),
-            const SizedBox(height: 8),
-
-            // Título em 3 linhas
-            Center(
-              child: Text(
-                'Agenda\nPet\nSaúde',
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      fontWeight: FontWeight.w800,
-                      color: const Color(0xFF2F4A46),
-                      fontSize: 44,
-                      height: 1.05,
-                      letterSpacing: -0.5,
-                    ),
-              ),
-            ),
-
-            const SizedBox(height: 32),
-
-            // Botão Google estendido
-            GoogleSignInExtendedButton(
-              onPressed: _handleGoogleSignIn,
-              text: 'Entrar com Google',
-              backgroundColor: const Color(0xFFBFE9E5),
-              textColor: const Color(0xFF2F4A46),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Botão Facebook estendido
-            FacebookSignInExtendedButton(
-              onPressed: _handleFacebookSignIn,
-              backgroundColor: const Color(0xFFBFE9E5),
-              textColor: const Color(0xFF2F4A46),
-              text: 'Entrar com Facebook',
-            ),
-
-            const SizedBox(height: 24),
-
-            // Divisor "Ou com e-mail"
-            Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                const Expanded(child: Divider()),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: Text(
-                    'Ou com e-mail',
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                          color: const Color(0xFF2F4A46),
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                        ),
-                  ),
-                ),
-                const Expanded(child: Divider()),
+                _buildHeader(context),
+                const SizedBox(height: AppSpacing.xl),
+                _buildSocialButtons(context),
+                const SizedBox(height: AppSpacing.lg),
+                _buildEmailDivider(context),
+                const SizedBox(height: AppSpacing.lg),
+                _buildEmailForm(context),
+                const SizedBox(height: AppSpacing.xl),
+                _buildActionButtons(context),
+                const SizedBox(height: AppSpacing.xl),
               ],
             ),
+          ),
+        ),
+      );
 
-            const SizedBox(height: 24),
-
-            // Formulário
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  CustomTextField(
-                    controller: _emailController,
-                    labelText: 'E-mail',
-                    hintText: 'Digite seu e-mail',
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, digite seu e-mail';
-                      }
-                      if (!value.contains('@')) {
-                        return 'Digite um e-mail válido';
-                      }
-                      return null;
-                    },
-                    suffixIcon: const Icon(
-                      Icons.check,
-                      color: Color(0xFFA5D9D3),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  CustomTextField(
-                    controller: _passwordController,
-                    labelText: 'Senha',
-                    hintText: '••••••••',
-                    obscureText: true,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Por favor, digite sua senha';
-                      }
-                      if (value.length < 6) {
-                        return 'A senha deve ter pelo menos 6 caracteres';
-                      }
-                      return null;
-                    },
-                    suffixIcon: TextButton(
-                      onPressed: _handleForgotPassword,
-                      child: const Text(
-                        'Esqueceu?',
-                        style: TextStyle(
-                          color: Color(0xFF9E9E9E),
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+  Widget _buildHeader(BuildContext context) => Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: Icon(
+              Icons.pets,
+              size: 36,
+              color: AppColors.textPrimaryWithOpacity(0.85),
+            ),
+          ),
+          const SizedBox(height: AppSpacing.sm),
+          Center(
+            child: Text(
+              'Agenda\nPet\nSaúde',
+              textAlign: TextAlign.center,
+              style: AppTextStyles.headlineLarge.copyWith(
+                color: AppColors.primary,
               ),
             ),
+          ),
+        ],
+      );
 
-            const SizedBox(height: 32),
+  Widget _buildSocialButtons(BuildContext context) => Column(
+        children: [
+          GoogleSignInExtendedButton(
+            onPressed: () => _handleGoogleSignIn(context),
+          ),
+          const SizedBox(height: AppSpacing.md),
+          FacebookSignInExtendedButton(
+            onPressed: () => _handleFacebookSignIn(context),
+            backgroundColor: AppColors.primaryLight,
+          ),
+        ],
+      );
 
-            // Botão Iniciar
-            PrimaryButton(
-              text: 'Iniciar',
-              onPressed: _handleEmailSignIn,
-              isLoading: _isLoading,
+  Widget _buildEmailDivider(BuildContext context) => Row(
+        children: [
+          const Expanded(child: Divider()),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+            child: Text(
+              'Ou com e-mail',
+              style: AppTextStyles.titleMedium.copyWith(
+                color: AppColors.primary,
+                fontWeight: FontWeight.w700,
+              ),
             ),
+          ),
+          const Expanded(child: Divider()),
+        ],
+      );
 
-            const SizedBox(height: 16),
-
-            // Botão Cadastrar
-            SecondaryButton(
-              text: 'Cadastrar',
-              onPressed: _handleSignUp,
+  Widget _buildEmailForm(BuildContext context) => Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            CustomTextField(
+              controller: _emailController,
+              labelText: 'E-mail',
+              hintText: 'Digite seu e-mail',
+              keyboardType: TextInputType.emailAddress,
+              validator: Validators.validateEmail,
+              suffixIcon: const Icon(
+                Icons.check,
+                color: AppColors.accent,
+              ),
             ),
-
-            const SizedBox(height: 32),
+            const SizedBox(height: AppSpacing.md),
+            CustomTextField(
+              controller: _passwordController,
+              labelText: 'Senha',
+              hintText: '••••••••',
+              obscureText: true,
+              validator: Validators.validatePassword,
+              suffixIcon: TextButton(
+                onPressed: () => _handleForgotPassword(context),
+                child: const Text(
+                  'Esqueceu?',
+                  style: TextStyle(
+                    color: AppColors.textSecondary,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
-      ),
-    );
-  }
+      );
+
+  Widget _buildActionButtons(BuildContext context) =>
+      BlocBuilder<AuthBloc, AuthState>(
+        builder: (context, state) {
+          final isLoading = state is AuthLoading;
+
+          return Column(
+            children: [
+              PrimaryButton(
+                text: 'Iniciar',
+                onPressed: isLoading ? null : () => _handleEmailSignIn(context),
+                isLoading: isLoading,
+              ),
+              const SizedBox(height: AppSpacing.md),
+              SecondaryButton(
+                text: 'Cadastrar',
+                onPressed: isLoading ? null : () => _handleSignUp(context),
+              ),
+            ],
+          );
+        },
+      );
 }

@@ -4,11 +4,6 @@ import 'facebook_buttons.dart';
 
 /// Widget que exibe uma linha com botões de redes sociais
 class SocialButtonsRow extends StatelessWidget {
-  final VoidCallback onGooglePressed;
-  final VoidCallback onFacebookPressed;
-  final double buttonSize;
-  final double spacing;
-
   const SocialButtonsRow({
     super.key,
     required this.onGooglePressed,
@@ -16,6 +11,11 @@ class SocialButtonsRow extends StatelessWidget {
     this.buttonSize = 48,
     this.spacing = 16,
   });
+
+  final VoidCallback onGooglePressed;
+  final VoidCallback onFacebookPressed;
+  final double buttonSize;
+  final double spacing;
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +38,6 @@ class SocialButtonsRow extends StatelessWidget {
 
 /// Widget que exibe botões estendidos de redes sociais em coluna
 class SocialExtendedButtonsColumn extends StatelessWidget {
-  final VoidCallback onGooglePressed;
-  final VoidCallback onFacebookPressed;
-  final double spacing;
-  final String googleText;
-  final String facebookText;
-
   const SocialExtendedButtonsColumn({
     super.key,
     required this.onGooglePressed,
@@ -52,6 +46,12 @@ class SocialExtendedButtonsColumn extends StatelessWidget {
     this.googleText = 'Entrar com Google',
     this.facebookText = 'Entrar com Facebook',
   });
+
+  final VoidCallback onGooglePressed;
+  final VoidCallback onFacebookPressed;
+  final double spacing;
+  final String googleText;
+  final String facebookText;
 
   @override
   Widget build(BuildContext context) {

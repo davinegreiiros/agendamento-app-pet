@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PetPrimaryButton extends StatelessWidget {
+  const PetPrimaryButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  });
+
   final String label;
   final VoidCallback onPressed;
-  const PetPrimaryButton(
-      {super.key, required this.label, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +34,14 @@ class PetPrimaryButton extends StatelessWidget {
 }
 
 class PetSecondaryButton extends StatelessWidget {
+  const PetSecondaryButton({
+    super.key,
+    required this.label,
+    required this.onPressed,
+  });
+
   final String label;
   final VoidCallback onPressed;
-  const PetSecondaryButton(
-      {super.key, required this.label, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {

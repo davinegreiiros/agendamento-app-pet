@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../core_widgets/pet_scaffold.dart';
 
 class LoginPage extends StatefulWidget {
-  static const String route = '/login';
   const LoginPage({super.key});
+
+  static const String route = '/login';
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -48,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
               Align(
                 alignment: Alignment.topLeft,
                 child: Icon(Icons.pets,
-                    size: 36, color: darkText.withOpacity(0.85)),
+                    size: 36, color: darkText.withValues(alpha: 0.85)),
               ),
               const SizedBox(height: 8),
 
@@ -81,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                             BorderRadius.circular(32), // mais arredondado
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.08),
+                            color: Colors.black.withValues(alpha: 0.08),
                             blurRadius: 18,
                             offset: const Offset(0, 10),
                             spreadRadius: 1,
@@ -93,12 +94,12 @@ class _LoginPageState extends State<LoginPage> {
                         child: InkWell(
                           borderRadius: BorderRadius.circular(32),
                           onTap: () {},
-                          child: Padding(
-                            padding: const EdgeInsets.symmetric(
+                          child: const Padding(
+                            padding: EdgeInsets.symmetric(
                                 horizontal: 22, vertical: 16),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: const [
+                              children: [
                                 Expanded(
                                   child: Text(
                                     'Logar com Google',
@@ -136,7 +137,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {},
                       style: OutlinedButton.styleFrom(
                         shape: const CircleBorder(),
-                        side: BorderSide(color: mintBorder, width: 2),
+                        side: const BorderSide(color: mintBorder, width: 2),
                         backgroundColor: Colors.white,
                         foregroundColor: const Color(0xFF2F4A46),
                       ),

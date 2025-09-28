@@ -1,15 +1,6 @@
 import 'package:flutter/material.dart';
 
 class PrimaryButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final bool isLoading;
-  final Color? backgroundColor;
-  final Color? textColor;
-  final double height;
-  final double borderRadius;
-  final EdgeInsetsGeometry? padding;
-
   const PrimaryButton({
     super.key,
     required this.text,
@@ -21,6 +12,15 @@ class PrimaryButton extends StatelessWidget {
     this.borderRadius = 40,
     this.padding,
   });
+
+  final String text;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final double height;
+  final double borderRadius;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +60,6 @@ class PrimaryButton extends StatelessWidget {
 }
 
 class SecondaryButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final bool isLoading;
-  final Color? backgroundColor;
-  final Color? textColor;
-  final double height;
-  final double borderRadius;
-  final EdgeInsetsGeometry? padding;
-
   const SecondaryButton({
     super.key,
     required this.text,
@@ -80,6 +71,15 @@ class SecondaryButton extends StatelessWidget {
     this.borderRadius = 40,
     this.padding,
   });
+
+  final String text;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final Color? backgroundColor;
+  final Color? textColor;
+  final double height;
+  final double borderRadius;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -119,17 +119,6 @@ class SecondaryButton extends StatelessWidget {
 }
 
 class OutlineButton extends StatelessWidget {
-  final String text;
-  final VoidCallback? onPressed;
-  final bool isLoading;
-  final Color? borderColor;
-  final Color? textColor;
-  final Color? backgroundColor;
-  final double height;
-  final double borderRadius;
-  final double borderWidth;
-  final EdgeInsetsGeometry? padding;
-
   const OutlineButton({
     super.key,
     required this.text,
@@ -143,6 +132,17 @@ class OutlineButton extends StatelessWidget {
     this.borderWidth = 2,
     this.padding,
   });
+
+  final String text;
+  final VoidCallback? onPressed;
+  final bool isLoading;
+  final Color? borderColor;
+  final Color? textColor;
+  final Color? backgroundColor;
+  final double height;
+  final double borderRadius;
+  final double borderWidth;
+  final EdgeInsetsGeometry? padding;
 
   @override
   Widget build(BuildContext context) {
@@ -186,14 +186,6 @@ class OutlineButton extends StatelessWidget {
 }
 
 class CustomIconButton extends StatelessWidget {
-  final IconData icon;
-  final VoidCallback? onPressed;
-  final Color? backgroundColor;
-  final Color? iconColor;
-  final double size;
-  final double iconSize;
-  final bool isCircular;
-
   const CustomIconButton({
     super.key,
     required this.icon,
@@ -204,6 +196,14 @@ class CustomIconButton extends StatelessWidget {
     this.iconSize = 24,
     this.isCircular = true,
   });
+
+  final IconData icon;
+  final VoidCallback? onPressed;
+  final Color? backgroundColor;
+  final Color? iconColor;
+  final double size;
+  final double iconSize;
+  final bool isCircular;
 
   @override
   Widget build(BuildContext context) {
@@ -219,7 +219,7 @@ class CustomIconButton extends StatelessWidget {
             ? const CircleBorder()
             : RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 2,
-        shadowColor: Colors.black.withOpacity(0.1),
+        shadowColor: Colors.black.withValues(alpha: 0.1),
         child: InkWell(
           onTap: onPressed,
           customBorder: isCircular

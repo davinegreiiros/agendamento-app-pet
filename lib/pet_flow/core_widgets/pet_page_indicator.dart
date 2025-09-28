@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class PetPageIndicator extends StatelessWidget {
+  const PetPageIndicator({
+    super.key,
+    required this.currentIndex,
+    required this.length,
+  });
+
   final int currentIndex;
   final int length;
-  const PetPageIndicator({super.key, required this.currentIndex, required this.length});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +22,8 @@ class PetPageIndicator extends StatelessWidget {
           height: 8,
           width: active ? 24 : 8,
           decoration: BoxDecoration(
-            color: active ? Theme.of(context).colorScheme.primary : Colors.black12,
+            color:
+                active ? Theme.of(context).colorScheme.primary : Colors.black12,
             borderRadius: BorderRadius.circular(6),
           ),
         );
@@ -25,4 +31,3 @@ class PetPageIndicator extends StatelessWidget {
     );
   }
 }
-

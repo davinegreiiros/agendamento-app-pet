@@ -3,13 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 /// Botão base para redes sociais (circular)
 class SocialButton extends StatelessWidget {
-  final String iconPath;
-  final VoidCallback onPressed;
-  final Color backgroundColor;
-  final Color iconColor;
-  final double size;
-  final bool isCircular;
-
   const SocialButton({
     super.key,
     required this.iconPath,
@@ -19,6 +12,13 @@ class SocialButton extends StatelessWidget {
     this.size = 48,
     this.isCircular = true,
   });
+
+  final String iconPath;
+  final VoidCallback onPressed;
+  final Color backgroundColor;
+  final Color iconColor;
+  final double size;
+  final bool isCircular;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +31,7 @@ class SocialButton extends StatelessWidget {
             ? const CircleBorder()
             : RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 2,
-        shadowColor: Colors.black.withOpacity(0.1),
+        shadowColor: Colors.black.withValues(alpha: 0.1),
         child: InkWell(
           onTap: onPressed,
           customBorder: isCircular
@@ -55,12 +55,6 @@ class SocialButton extends StatelessWidget {
 
 /// Botão estendido base para redes sociais
 class SocialExtendedButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String text;
-  final String iconPath;
-  final Color backgroundColor;
-  final Color textColor;
-
   const SocialExtendedButton({
     super.key,
     required this.onPressed,
@@ -69,6 +63,12 @@ class SocialExtendedButton extends StatelessWidget {
     this.backgroundColor = Colors.white,
     this.textColor = const Color(0xFF2F4A46),
   });
+
+  final VoidCallback onPressed;
+  final String text;
+  final String iconPath;
+  final Color backgroundColor;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -83,7 +83,7 @@ class SocialExtendedButton extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.08),
+            color: Colors.black.withValues(alpha: 0.08),
             blurRadius: 18,
             offset: const Offset(0, 10),
             spreadRadius: 1,

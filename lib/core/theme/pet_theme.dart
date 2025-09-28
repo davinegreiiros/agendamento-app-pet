@@ -46,14 +46,14 @@ class PetTheme {
         ),
       ),
       chipTheme: ChipThemeData(
-        backgroundColor: primary.withOpacity(0.15),
+        backgroundColor: primary.withValues(alpha: 0.15),
         selectedColor: primary,
         labelStyle: const TextStyle(color: accent),
         secondaryLabelStyle: const TextStyle(color: Colors.white),
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       ),
-      cardTheme: CardTheme(
+      cardTheme: CardThemeData(
         color: surface,
         elevation: 0,
         shape: RoundedRectangleBorder(
