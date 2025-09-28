@@ -97,7 +97,7 @@ class SecondaryButton extends StatelessWidget {
             borderRadius: BorderRadius.circular(borderRadius),
           ),
           textStyle: const TextStyle(
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: FontWeight.w700,
           ),
           elevation: 0,

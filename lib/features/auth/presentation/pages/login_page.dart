@@ -84,13 +84,13 @@ class _LoginPageState extends State<LoginPage> {
               children: [
                 _buildHeader(context),
                 const SizedBox(height: AppSpacing.xl),
-                _buildSocialButtons(context),
-                const SizedBox(height: AppSpacing.lg),
-                _buildEmailDivider(context),
-                const SizedBox(height: AppSpacing.lg),
                 _buildEmailForm(context),
                 const SizedBox(height: AppSpacing.xl),
                 _buildActionButtons(context),
+                const SizedBox(height: AppSpacing.lg),
+                _buildEmailDivider(context),
+                const SizedBox(height: AppSpacing.lg),
+                _buildSocialButtons(context),
                 const SizedBox(height: AppSpacing.xl),
               ],
             ),
@@ -140,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             child: Text(
-              'Ou com e-mail',
+              'Acessar via',
               style: AppTextStyles.titleMedium.copyWith(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w700,
@@ -195,15 +195,22 @@ class _LoginPageState extends State<LoginPage> {
 
           return Column(
             children: [
-              PrimaryButton(
-                text: 'Iniciar',
-                onPressed: isLoading ? null : () => _handleEmailSignIn(context),
-                isLoading: isLoading,
+              SizedBox(
+                width: double.infinity,
+                child: PrimaryButton(
+                  text: 'Iniciar',
+                  onPressed:
+                      isLoading ? null : () => _handleEmailSignIn(context),
+                  isLoading: isLoading,
+                ),
               ),
               const SizedBox(height: AppSpacing.md),
-              SecondaryButton(
-                text: 'Cadastrar',
-                onPressed: isLoading ? null : () => _handleSignUp(context),
+              SizedBox(
+                width: double.infinity,
+                child: SecondaryButton(
+                  text: 'Cadastrar',
+                  onPressed: isLoading ? null : () => _handleSignUp(context),
+                ),
               ),
             ],
           );

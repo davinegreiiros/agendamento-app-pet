@@ -6,7 +6,7 @@ import 'pet_app.dart';
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   GoogleFonts.config.allowRuntimeFetching =
-      false; // evita falha de rede para fontes
+      true; // permite download de fontes em tempo de execução
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
