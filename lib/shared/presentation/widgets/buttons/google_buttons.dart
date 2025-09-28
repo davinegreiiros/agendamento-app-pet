@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'social_button_base.dart';
 
 class GoogleSignInButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final double size;
-
   const GoogleSignInButton({
     super.key,
     required this.onPressed,
     this.size = 48,
   });
+
+  final VoidCallback onPressed;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,6 @@ class GoogleSignInButton extends StatelessWidget {
 }
 
 class GoogleSignInExtendedButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String text;
-  final Color backgroundColor;
-  final Color textColor;
-
   const GoogleSignInExtendedButton({
     super.key,
     required this.onPressed,
@@ -35,6 +30,11 @@ class GoogleSignInExtendedButton extends StatelessWidget {
     this.backgroundColor = const Color(0xFFBFE9E5),
     this.textColor = const Color(0xFF2F4A46),
   });
+
+  final VoidCallback onPressed;
+  final String text;
+  final Color backgroundColor;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {

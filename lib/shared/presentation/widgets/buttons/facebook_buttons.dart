@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'social_button_base.dart';
 
 class FacebookSignInButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final double size;
-
   const FacebookSignInButton({
     super.key,
     required this.onPressed,
     this.size = 48,
   });
+
+  final VoidCallback onPressed;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +23,6 @@ class FacebookSignInButton extends StatelessWidget {
 }
 
 class FacebookSignInExtendedButton extends StatelessWidget {
-  final VoidCallback onPressed;
-  final String text;
-  final Color backgroundColor;
-  final Color textColor;
-
   const FacebookSignInExtendedButton({
     super.key,
     required this.onPressed,
@@ -35,6 +30,11 @@ class FacebookSignInExtendedButton extends StatelessWidget {
     this.backgroundColor = Colors.white,
     this.textColor = const Color(0xFF2F4A46),
   });
+
+  final VoidCallback onPressed;
+  final String text;
+  final Color backgroundColor;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {

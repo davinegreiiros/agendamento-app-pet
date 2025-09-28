@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 
 class PetHeaderSkip extends StatelessWidget {
+  const PetHeaderSkip({
+    super.key,
+    required this.onSkip,
+  });
+
   final VoidCallback onSkip;
-  const PetHeaderSkip({super.key, required this.onSkip});
 
   @override
   Widget build(BuildContext context) {

@@ -1,247 +1,144 @@
-# Agendamento Pet App
+# Agenda Pet Saúde
 
-Um aplicativo Flutter para agendamento e cuidados de pets, oferecendo uma plataforma completa para gerenciar a saúde e bem-estar dos seus animais de estimação.
+Um aplicativo Flutter para agendamento e cuidados de pets, desenvolvido seguindo os princípios de **Clean Architecture** e **Clean Code**.
 
-## 📱 Sobre o App
+## 🏗️ Arquitetura
 
-O **Agendamento Pet App** é uma solução digital que facilita o cuidado com pets, permitindo:
-
-- 🐱 **Agendamento de consultas** veterinárias de forma rápida e prática
-- 🐶 **Acompanhamento da saúde** do seu pet
-- 📋 **Gestão de exames** e serviços veterinários
-- 👤 **Perfil personalizado** para cada animal
-- 🏥 **Acesso centralizado** a informações de saúde
-
-## 🚀 Funcionalidades
-
-### ✨ Principais Features
-- **Onboarding interativo** com apresentação das funcionalidades
-- **Sistema de autenticação** seguro
-- **Dashboard principal** com informações do pet
-- **Navegação intuitiva** entre seções
-- **Interface responsiva** para diferentes dispositivos
-
-### 📱 Telas Disponíveis
-- **Onboarding**: Introdução ao app com slides informativos
-- **Login**: Autenticação do usuário
-- **Home**: Dashboard principal com saudação personalizada
-- **Detalhes do Pet**: Informações específicas do animal
-- **Conta**: Gerenciamento do perfil do usuário
-
-## 🛠️ Tecnologias Utilizadas
-
-### Framework e Linguagem
-- **Flutter** (SDK >=3.0.5 <4.0.0)
-- **Dart**
-
-### Arquitetura
-- **Clean Architecture** - Separação clara de responsabilidades
-- **Feature-First** - Organização por funcionalidades
-- **SOLID Principles** - Princípios de design de software
-
-### Principais Dependências
-- `flutter_bloc ^8.1.3` - Gerenciamento de estado
-- `equatable ^2.0.5` - Comparação de objetos
-- `dartz ^0.10.1` - Programação funcional (Either, Option)
-- `google_fonts ^6.1.0` - Fontes personalizadas
-- `flutter_svg ^2.0.9` - Suporte a SVG
-- `smooth_page_indicator ^1.1.0` - Indicadores de página
-- `phosphor_flutter ^2.0.1` - Ícones modernos
-- `cupertino_icons ^1.0.8` - Ícones iOS
-
-## 🎨 Design e UI
-
-O app utiliza um design moderno e intuitivo com:
-- **Design System** padronizado com componentes reutilizáveis
-- **Tema personalizado** com cores específicas para pets
-- **Botões de redes sociais** com logos oficiais (Google, Facebook)
-- **Componentes padronizados** (botões, campos de texto, scaffolds)
-- **Navegação fluida** entre telas
-- **Indicadores visuais** para melhor UX
-- **Assets otimizados** com imagens SVG e PNG
-- **Responsividade** para diferentes tamanhos de tela
-
-### 🎨 Componentes Padronizados
-
-#### **Botões de Redes Sociais (Padrão Unificado)**
-- `GoogleSignInButton` - Botão circular com logo do Google
-- `FacebookSignInButton` - Botão circular com logo do Facebook
-- `GoogleSignInExtendedButton` - Botão estendido "Entrar com Google"
-- `FacebookSignInExtendedButton` - Botão estendido "Entrar com Facebook"
-- `SocialButtonsRow` - Linha com botões circulares de redes sociais
-- `SocialExtendedButtonsColumn` - Coluna com botões estendidos de redes sociais
-
-**🎯 Padrão Visual Unificado:**
-- ✅ **Fundo branco** para todos os botões de redes sociais
-- ✅ **Texto escuro** (`#2F4A46`) para melhor legibilidade
-- ✅ **Ícones coloridos** das redes sociais destacados no fundo branco
-- ✅ **Consistência visual** entre Google e Facebook
-
-#### **Botões Gerais**
-- `PrimaryButton` - Botão principal da aplicação
-- `SecondaryButton` - Botão secundário
-- `OutlineButton` - Botão com borda
-- `IconButton` - Botão apenas com ícone
-
-#### **Campos de Texto**
-- `CustomTextField` - Campo de texto padronizado com validação
-
-#### **Scaffolds e Layouts**
-- `AuthScaffold` - Layout base para telas de autenticação
-
-### 📱 Como Usar os Componentes
-
-```dart
-// Botões estendidos de redes sociais
-GoogleSignInExtendedButton(
-  onPressed: () => handleGoogleSignIn(),
-  text: 'Entrar com Google',
-)
-
-FacebookSignInExtendedButton(
-  onPressed: () => handleFacebookSignIn(),
-  text: 'Entrar com Facebook',
-  backgroundColor: Colors.white,  // Padrão unificado
-  textColor: const Color(0xFF2F4A46),
-)
-
-// Botões circulares em linha
-SocialButtonsRow(
-  onGooglePressed: () => handleGoogleSignIn(),
-  onFacebookPressed: () => handleFacebookSignIn(),
-  buttonSize: 64,
-  spacing: 24,
-)
-
-// Botões estendidos em coluna
-SocialExtendedButtonsColumn(
-  onGooglePressed: () => handleGoogleSignIn(),
-  onFacebookPressed: () => handleFacebookSignIn(),
-)
-
-// Botão primário
-PrimaryButton(
-  text: 'Entrar',
-  onPressed: () => handleLogin(),
-  isLoading: isLoading,
-)
-
-// Campo de texto customizado
-CustomTextField(
-  controller: emailController,
-  labelText: 'E-mail',
-  hintText: 'Digite seu e-mail',
-  validator: (value) => validateEmail(value),
-)
-```
-
-## 📁 Estrutura do Projeto (Clean Architecture)
+O projeto segue os princípios da **Clean Architecture** com separação clara de responsabilidades:
 
 ```
 lib/
-├── features/                    # Funcionalidades por domínio
-│   ├── auth/                   # Autenticação
-│   │   ├── data/
-│   │   │   ├── datasources/    # Fontes de dados (API, Local)
-│   │   │   ├── models/         # Modelos de dados
-│   │   │   └── repositories/   # Implementação dos repositórios
-│   │   ├── domain/
-│   │   │   ├── entities/       # Entidades de negócio
-│   │   │   ├── repositories/   # Contratos dos repositórios
-│   │   │   └── usecases/       # Casos de uso
-│   │   └── presentation/
-│   │       ├── bloc/           # Gerenciamento de estado
-│   │       ├── pages/          # Telas
-│   │       └── widgets/        # Componentes específicos
-│   ├── home/                   # Dashboard principal
-│   └── pet_management/         # Gestão de pets
-├── shared/                     # Recursos compartilhados
-│   ├── constants/              # Constantes da aplicação
+├── core/                          # Código compartilhado
+│   ├── constants/                 # Constantes da aplicação
+│   ├── di/                       # Injeção de dependências
+│   └── validators/               # Validações centralizadas
+├── features/                     # Features da aplicação
+│   ├── auth/                     # Feature de autenticação
+│   │   ├── data/                 # Camada de dados
+│   │   │   ├── datasources/      # Fontes de dados (API, Local)
+│   │   │   └── repositories/     # Implementação dos repositories
+│   │   ├── domain/               # Camada de domínio
+│   │   │   ├── entities/         # Entidades de negócio
+│   │   │   ├── repositories/     # Contratos dos repositories
+│   │   │   └── usecases/         # Casos de uso
+│   │   └── presentation/         # Camada de apresentação
+│   │       ├── bloc/            # Gerenciamento de estado
+│   │       ├── pages/           # Telas
+│   │       └── widgets/         # Widgets específicos
+│   └── pets/                    # Feature de pets
+│       ├── data/
+│       ├── domain/
+│       └── presentation/
+├── shared/                       # Código compartilhado entre features
+│   ├── constants/               # Constantes compartilhadas
 │   ├── errors/                 # Tratamento de erros
-│   ├── network/                # Configuração de rede
-│   ├── presentation/
-│   │   ├── theme/              # Temas e cores
-│   │   └── widgets/            # Componentes reutilizáveis
-│   │       ├── buttons/        # Botões organizados por tipo
-│   │       │   ├── google_buttons.dart
-│   │       │   ├── facebook_buttons.dart
-│   │       │   ├── social_button_base.dart
-│   │       │   ├── social_buttons_row.dart
-│   │       │   └── index.dart  # Exportações centralizadas
-│   │       └── examples/       # Exemplos de uso
-│   └── utils/                  # Utilitários
-├── main.dart                   # Ponto de entrada
-├── main_navigation.dart        # Navegação principal
-└── pet_app.dart               # Configuração do app
+│   └── presentation/           # Widgets e temas compartilhados
+└── pet_flow/                    # Fluxo principal da aplicação
+    ├── account/                # Página de conta
+    ├── auth/                   # Páginas de autenticação
+    ├── core_widgets/          # Widgets principais
+    ├── home/                  # Página inicial
+    ├── onboarding/            # Página de onboarding
+    └── pet_details/           # Detalhes do pet
 ```
 
-### 🏗️ Princípios da Clean Architecture
+## 🎯 Princípios Aplicados
 
-#### **Camada de Apresentação (Presentation)**
-- **Pages**: Telas da aplicação
-- **Widgets**: Componentes de UI reutilizáveis
-- **BLoC**: Gerenciamento de estado e lógica de apresentação
+### Clean Architecture
+- **Separação de responsabilidades**: Cada camada tem uma responsabilidade específica
+- **Inversão de dependência**: Camadas internas não dependem das externas
+- **Independência de frameworks**: O código de negócio não depende do Flutter
 
-#### **Camada de Domínio (Domain)**
-- **Entities**: Objetos de negócio puros
-- **Use Cases**: Regras de negócio da aplicação
-- **Repositories**: Contratos para acesso a dados
+### Clean Code
+- **Nomes descritivos**: Variáveis, funções e classes com nomes claros
+- **Funções pequenas**: Cada função tem uma única responsabilidade
+- **Comentários quando necessário**: Código autoexplicativo
+- **Constantes centralizadas**: Cores, espaçamentos e estilos em arquivos dedicados
 
-#### **Camada de Dados (Data)**
-- **Models**: Representação dos dados (JSON, etc.)
-- **Repositories**: Implementação concreta dos contratos
-- **Data Sources**: Acesso a APIs, banco local, etc.
+### SOLID Principles
+- **Single Responsibility**: Cada classe tem uma única responsabilidade
+- **Open/Closed**: Aberto para extensão, fechado para modificação
+- **Liskov Substitution**: Substituição de implementações sem quebrar o código
+- **Interface Segregation**: Interfaces específicas para cada necessidade
+- **Dependency Inversion**: Dependência de abstrações, não de implementações
+
+## 🛠️ Tecnologias Utilizadas
+
+- **Flutter**: Framework de desenvolvimento
+- **BLoC**: Gerenciamento de estado
+- **Dartz**: Programação funcional (Either, Option)
+- **Equatable**: Comparação de objetos
+- **Google Fonts**: Tipografia
+- **Flutter SVG**: Ícones SVG
+
+## 📱 Features Implementadas
+
+### ✅ Autenticação
+- Login com email e senha
+- Login social (Google, Facebook)
+- Cadastro de usuário
+- Recuperação de senha
+- Logout
+
+### ✅ Gerenciamento de Estado
+- BLoC para autenticação
+- Estados reativos
+- Tratamento de erros
+
+### ✅ UI/UX
+- Design system consistente
+- Cores e espaçamentos padronizados
+- Validações centralizadas
+- Feedback visual para o usuário
 
 ## 🚀 Como Executar
 
-### Pré-requisitos
-- Flutter SDK (versão 3.5.4 ou superior)
-- Dart SDK
-- Android Studio / VS Code
-- Emulador Android/iOS ou dispositivo físico
-
-### Instalação
-1. Clone o repositório:
-```bash
-git clone <url-do-repositorio>
-cd agendamento-pet-app
-```
-
+1. Clone o repositório
 2. Instale as dependências:
-```bash
-flutter pub get
-```
+   ```bash
+   flutter pub get
+   ```
+3. Execute o aplicativo:
+   ```bash
+   flutter run
+   ```
 
-3. Execute o app:
-```bash
-flutter run
-```
+## 📋 Próximos Passos
+
+- [ ] Implementar feature de pets completa
+- [ ] Adicionar testes unitários
+- [ ] Implementar testes de integração
+- [ ] Adicionar persistência local (Hive/SQLite)
+- [ ] Implementar API real
+- [ ] Adicionar feature de agendamentos
+- [ ] Implementar notificações push
 
 ## 🧪 Testes
 
-Para executar os testes:
 ```bash
+# Executar todos os testes
 flutter test
+
+# Executar testes com cobertura
+flutter test --coverage
 ```
 
-## 📱 Dispositivos suportados
+## 📝 Convenções de Código
 
-- ✅ Android
-- ✅ iOS
+- **Nomenclatura**: camelCase para variáveis e métodos, PascalCase para classes
+- **Estrutura**: Um arquivo por classe
+- **Imports**: Ordenados alfabeticamente
+- **Documentação**: Dartdoc para APIs públicas
+- **Commits**: Conventional Commits
 
 ## 🤝 Contribuição
 
-Contribuições são bem-vindas! Sinta-se à vontade para:
-1. Fazer fork do projeto
-2. Criar uma branch para sua feature
-3. Commit suas mudanças
-4. Push para a branch
-5. Abrir um Pull Request
+1. Fork o projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
+3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
+4. Push para a branch (`git push origin feature/AmazingFeature`)
+5. Abra um Pull Request
 
 ## 📄 Licença
 
-Este projeto está sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
-
----
-
-**Desenvolvido com ❤️ para o cuidado dos nossos pets** 🐾
+Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.

@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 
 class AuthScaffold extends StatelessWidget {
-  final Widget child;
-  final Color? backgroundColor;
-  final PreferredSizeWidget? appBar;
-  final Widget? floatingActionButton;
-  final bool resizeToAvoidBottomInset;
-
   const AuthScaffold({
     super.key,
     required this.child,
@@ -15,6 +9,12 @@ class AuthScaffold extends StatelessWidget {
     this.floatingActionButton,
     this.resizeToAvoidBottomInset = true,
   });
+
+  final Widget child;
+  final Color? backgroundColor;
+  final PreferredSizeWidget? appBar;
+  final Widget? floatingActionButton;
+  final bool resizeToAvoidBottomInset;
 
   @override
   Widget build(BuildContext context) {

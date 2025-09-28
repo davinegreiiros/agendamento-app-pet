@@ -6,8 +6,9 @@ import '../core_widgets/pet_scaffold.dart';
 import '../auth/login_page.dart';
 
 class OnboardingPage extends StatefulWidget {
-  static const String route = '/onboarding';
   const OnboardingPage({super.key});
+
+  static const String route = '/onboarding';
 
   @override
   State<OnboardingPage> createState() => _OnboardingPageState();
@@ -95,15 +96,15 @@ class _OnboardingPageState extends State<OnboardingPage> {
 }
 
 class _OnbContent extends StatelessWidget {
-  final String imagePath;
-  final String title;
-  final String subtitle;
-
   const _OnbContent({
     required this.imagePath,
     required this.title,
     required this.subtitle,
   });
+
+  final String imagePath;
+  final String title;
+  final String subtitle;
 
   @override
   Widget build(BuildContext context) {
