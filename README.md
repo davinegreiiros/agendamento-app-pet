@@ -6,40 +6,99 @@ Um aplicativo Flutter para agendamento e cuidados de pets, desenvolvido seguindo
 
 O projeto segue os princípios da **Clean Architecture** com separação clara de responsabilidades:
 
+
 ```
-lib/
-├── core/                          # Código compartilhado
-│   ├── constants/                 # Constantes da aplicação
-│   ├── di/                       # Injeção de dependências
-│   └── validators/               # Validações centralizadas
-├── features/                     # Features da aplicação
-│   ├── auth/                     # Feature de autenticação
-│   │   ├── data/                 # Camada de dados
-│   │   │   ├── datasources/      # Fontes de dados (API, Local)
-│   │   │   └── repositories/     # Implementação dos repositories
-│   │   ├── domain/               # Camada de domínio
-│   │   │   ├── entities/         # Entidades de negócio
-│   │   │   ├── repositories/     # Contratos dos repositories
-│   │   │   └── usecases/         # Casos de uso
-│   │   └── presentation/         # Camada de apresentação
-│   │       ├── bloc/            # Gerenciamento de estado
-│   │       ├── pages/           # Telas
-│   │       └── widgets/         # Widgets específicos
-│   └── pets/                    # Feature de pets
-│       ├── data/
-│       ├── domain/
-│       └── presentation/
-├── shared/                       # Código compartilhado entre features
-│   ├── constants/               # Constantes compartilhadas
-│   ├── errors/                 # Tratamento de erros
-│   └── presentation/           # Widgets e temas compartilhados
-└── pet_flow/                    # Fluxo principal da aplicação
-    ├── account/                # Página de conta
-    ├── auth/                   # Páginas de autenticação
-    ├── core_widgets/          # Widgets principais
-    ├── home/                  # Página inicial
-    ├── onboarding/            # Página de onboarding
-    └── pet_details/           # Detalhes do pet
+├── 📁 lib/
+│   ├── 📁 core/ # Código compartilhado
+│   │   ├── 📁 constants/                 # Constantes da aplicação
+│   │   │   └── 🔵 app_constants.dart
+│   │   ├── 📁 di/                        # Injeção de dependências
+│   │   │   └── 🔵 dependency_injection.dart
+│   │   ├── 📁 theme/
+│   │   │   ├── 🔵 app_theme.dart
+│   │   │   └── 🔵 pet_theme.dart
+│   │   └── 📁 validators/                # Validações centralizadas
+│   │       └── 🔵 validators.dart
+│   ├── 📁 features/  # Features da aplicação
+│   │   ├── 📁 auth/
+│   │   │   ├── 📁 data/  # Camada de dados
+│   │   │   │   ├── 📁 datasources/       # Fontes de dados (API, Local)
+│   │   │   │   │   ├── 🔵 auth_local_datasource.dart
+│   │   │   │   │   └── 🔵 auth_remote_datasource.dart
+│   │   │   │   └── 📁 repositories/      # Implementação dos repositories
+│   │   │   │       └── 🔵 auth_repository_impl.dart
+│   │   │   ├── 📁 domain/
+│   │   │   │   ├── 📁 entities/
+│   │   │   │   │   └── 🔵 user.dart
+│   │   │   │   ├── 📁 repositories/
+│   │   │   │   │   └── 🔵 auth_repository.dart
+│   │   │   │   └── 📁 usecases/          # Casos de uso
+│   │   │   │       ├── 🔵 get_current_user.dart
+│   │   │   │       ├── 🔵 reset_password.dart
+│   │   │   │       ├── 🔵 sign_in_with_email.dart
+│   │   │   │       ├── 🔵 sign_in_with_facebook.dart
+│   │   │   │       ├── 🔵 sign_in_with_google.dart
+│   │   │   │       ├── 🔵 sign_out.dart
+│   │   │   │       └── 🔵 sign_up.dart
+│   │   │   └── 📁 presentation/          # Camada de apresentação
+│   │   │       ├── 📁 bloc/
+│   │   │       │   ├── 🔵 auth_bloc.dart
+│   │   │       │   └── 🔵 auth_state.dart
+│   │   │       ├── 📁 pages/
+│   │   │       │   └── 🔵 login_page.dart
+│   │   │       └── 📁 widgets/
+│   │   │           ├── 🔵 auth_scaffold.dart
+│   │   │           └── 🔵 custom_text_field.dart
+│   │   └── 📁 pets/  # Feature de pets
+│   │       └── 📁 domain/                # Camada de domínio
+│   │           ├── 📁 entities/
+│   │           │   └── 🔵 pet.dart
+│   │           ├── 📁 repositories/
+│   │           │   └── 🔵 pet_repository.dart
+│   │           └── 📁 usecases/
+│   │               ├── 🔵 create_pet.dart
+│   │               └── 🔵 get_pets_by_owner.dart
+│   ├── 📁 pet_flow/                     # Fluxo principal da aplicação
+│   │   ├── 📁 account/
+│   │   │   └── 🔵 account_page.dart
+│   │   ├── 📁 auth/
+│   │   │   └── 🔵 login_page.dart
+│   │   ├── 📁 core_widgets/
+│   │   │   ├── 🔵 pet_buttons.dart
+│   │   │   ├── 🔵 pet_header_skip.dart
+│   │   │   ├── 🔵 pet_page_indicator.dart
+│   │   │   └── 🔵 pet_scaffold.dart
+│   │   ├── 📁 home/
+│   │   │   └── 🔵 home_page.dart
+│   │   ├── 📁 onboarding/
+│   │   │   └── 🔵 onboarding_page.dart
+│   │   └── 📁 pet_details/
+│   │       └── 🔵 pet_details_page.dart
+│   ├── 📁 shared/
+│   │   ├── 📁 constants/
+│   │   │   └── 🔵 app_routes.dart
+│   │   ├── 📁 errors/
+│   │   │   └── 🔵 failures.dart
+│   │   └── 📁 presentation/             # Widgets e temas compartilhados
+│   │       ├── 📁 theme/
+│   │       │   ├── 🔵 app_colors.dart
+│   │       │   └── 🔵 app_theme.dart
+│   │       └── 📁 widgets/
+│   │           ├── 📁 buttons/
+│   │           │   ├── 🔵 facebook_buttons.dart
+│   │           │   ├── 🔵 google_buttons.dart
+│   │           │   ├── 🔵 index.dart
+│   │           │   ├── 🔵 social_button_base.dart
+│   │           │   └── 🔵 social_buttons_row.dart
+│   │           ├── 📁 examples/
+│   │           │   ├── 🔵 button_test.dart
+│   │           │   └── 🔵 social_buttons_example.dart
+│   │           ├── 🔵 components_showcase.dart
+│   │           └── 🔵 custom_buttons.dart
+│   ├── 🔵 main.dart
+│   ├── 🔵 main_navigation.dart
+│   └── 🔵 pet_app.dart
+
 ```
 
 ## 🎯 Princípios Aplicados
@@ -81,7 +140,7 @@ lib/
 - Logout
 
 ### ✅ Gerenciamento de Estado
-- BLoC para autenticação
+- BLoc para autenticação
 - Estados reativos
 - Tratamento de erros
 
