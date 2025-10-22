@@ -1,7 +1,7 @@
 name: agendamento_pet_app
 description: "Um aplicativo Flutter para agendamento e cuidados de pets."
 
-publish_to: 'none' 
+publish_to: 'none'
 
 
 version: 1.0.0+1
@@ -48,5 +48,3 @@ flutter:
     - assets/image/foto-pet1.png
     - assets/image/foto-pet2.png
     - assets/icons/social/
-
- 
