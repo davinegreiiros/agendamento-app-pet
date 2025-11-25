@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 // ignore: prefer_relative_imports
 import 'package:agendamento_pet_app/shared/presentation/theme/app_theme.dart';
 // ignore: prefer_relative_imports
-import 'package:agendamento_pet_app/pet_flow/onboarding/onboarding_page.dart';
-// ignore: prefer_relative_imports
 import 'package:agendamento_pet_app/features/auth/presentation/pages/login_page.dart';
 // ignore: prefer_relative_imports
 import 'package:agendamento_pet_app/main_navigation.dart';
 // ignore: prefer_relative_imports
 import 'package:agendamento_pet_app/core/di/dependency_injection.dart';
+// ignore: prefer_relative_imports
+import 'package:agendamento_pet_app/shared/constants/app_routes.dart';
 
 class PetApp extends StatelessWidget {
   const PetApp({super.key});
@@ -21,11 +21,10 @@ class PetApp extends StatelessWidget {
         title: 'Agenda Pet Saúde',
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        initialRoute: OnboardingPage.route,
+        initialRoute: AppRoutes.login,
         routes: {
-          OnboardingPage.route: (_) => const OnboardingPage(),
-          LoginPage.route: (_) => const LoginPage(),
-          '/main': (_) => const MainNavigation(),
+          AppRoutes.login: (_) => const LoginPage(),
+          AppRoutes.main: (_) => const MainNavigation(),
         },
       ),
     );

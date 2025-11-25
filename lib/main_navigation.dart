@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
-import 'pet_flow/home/home_page.dart';
-import 'pet_flow/account/account_page.dart';
-import 'pet_flow/pet_details/pet_details_page.dart';
+// ignore: prefer_relative_imports
+import 'package:agendamento_pet_app/features/home/presentation/pages/home_page.dart';
+// ignore: prefer_relative_imports
+import 'package:agendamento_pet_app/features/account/presentation/pages/account_page.dart';
+// ignore: prefer_relative_imports
+import 'package:agendamento_pet_app/features/pets/presentation/pages/pets_list_page.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -18,8 +21,8 @@ class _MainNavigationState extends State<MainNavigation> {
 
   final List<Widget> _pages = [
     const HomePage(),
+    const PetsListPage(),
     const AccountPage(),
-    const PetDetailsPage(),
   ];
 
   @override
@@ -70,20 +73,20 @@ class _MainNavigationState extends State<MainNavigation> {
             BottomNavigationBarItem(
               icon: PhosphorIcon(
                 _currentIndex == 1
+                    ? PhosphorIcons.dog(PhosphorIconsStyle.fill)
+                    : PhosphorIcons.dog(),
+                size: 24,
+              ),
+              label: 'Meus Pets',
+            ),
+            BottomNavigationBarItem(
+              icon: PhosphorIcon(
+                _currentIndex == 2
                     ? PhosphorIcons.user(PhosphorIconsStyle.fill)
                     : PhosphorIcons.user(),
                 size: 24,
               ),
               label: 'Conta',
-            ),
-            BottomNavigationBarItem(
-              icon: PhosphorIcon(
-                _currentIndex == 2
-                    ? PhosphorIcons.dog(PhosphorIconsStyle.fill)
-                    : PhosphorIcons.dog(),
-                size: 24,
-              ),
-              label: 'Cachorro',
             ),
           ],
         ),
