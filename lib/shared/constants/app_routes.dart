@@ -1,4 +1,7 @@
 class AppRoutes {
+  // Splash route
+  static const String splash = '/';
+
   // Auth routes
   static const String onboarding = '/onboarding';
   static const String login = '/login';
