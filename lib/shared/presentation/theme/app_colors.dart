@@ -1,25 +1,30 @@
 import 'package:flutter/material.dart';
 
 class AppColors {
-  // Cores principais baseadas no design fornecido
-  static const Color primary = Color(0xFFBFE9E5); // mint/verde claro
-  static const Color primaryDark = Color(0xFF2F4A46); // verde escuro
+  // Cores principais
+  static const Color primary = Color(0xFF2F4A46); // verde escuro
+  static const Color primaryLight = Color(0xFFBFE9E5); // mint/verde claro
+  static const Color primaryLighter = Color(0xFFC4E8E3);
+  static const Color accent = Color(0xFFA5D9D3);
   static const Color primaryBorder = Color(0xFFA5D9D3); // borda mint
 
+  // Cores secundárias
+  static const Color secondary = Color(0xFFC9C1F0);
+
   // Cores de fundo
-  static const Color background = Color(0xFFF8F9FA); // fundo claro
+  static const Color background = Color(0xFFFFFFFF); // fundo branco
   static const Color surface = Colors.white; // cards e superfícies
 
   // Cores de texto
   static const Color textPrimary = Color(0xFF2C2C2C); // texto principal
-  static const Color textSecondary = Color(0xFF6B7280); // texto secundário
+  static const Color textSecondary = Color(0xFF9E9E9E); // texto secundário
   static const Color textHint = Color(0xFF9E9E9E); // placeholder
 
   // Cores de estado
-  static const Color success = Color(0xFF10B981);
-  static const Color warning = Color(0xFFF59E0B);
-  static const Color error = Color(0xFFEF4444);
-  static const Color info = Color(0xFF3B82F6);
+  static const Color success = Color(0xFF4CAF50);
+  static const Color warning = Color(0xFFFF9800);
+  static const Color error = Color(0xFFF44336);
+  static const Color info = Color(0xFF2196F3);
 
   // Cores neutras
   static const Color grey50 = Color(0xFFF9FAFB);
