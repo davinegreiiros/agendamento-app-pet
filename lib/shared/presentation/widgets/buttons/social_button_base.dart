@@ -31,7 +31,7 @@ class SocialButton extends StatelessWidget {
             ? const CircleBorder()
             : RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         elevation: 2,
-        shadowColor: Colors.black.withValues(alpha: 0.1),
+        shadowColor: Colors.black.withOpacity(0.1),
         child: InkWell(
           onTap: onPressed,
           customBorder: isCircular
@@ -83,7 +83,7 @@ class SocialExtendedButton extends StatelessWidget {
         ),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.08),
+            color: Colors.black.withOpacity(0.08),
             blurRadius: 18,
             offset: const Offset(0, 10),
             spreadRadius: 1,

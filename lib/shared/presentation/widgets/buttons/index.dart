@@ -5,4 +5,5 @@ export 'facebook_buttons.dart';
 export 'social_buttons_row.dart';
 
 // Exportações dos botões gerais
-export '../custom_buttons.dart';
+export 'primary_button.dart';
+export 'secondary_button.dart';

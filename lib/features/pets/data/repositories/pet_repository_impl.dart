@@ -111,11 +111,9 @@ class PetRepositoryImpl implements PetRepository {
   Failure _handleException(Exception exception) {
     if (exception.toString().contains('SocketException') ||
         exception.toString().contains('NetworkException')) {
-      return NetworkFailure(message: 'Erro de conexão');
+      return const NetworkFailure('Erro de conexão');
     }
 
-    return UnknownFailure(
-      message: 'Erro inesperado: ${exception.toString()}',
-    );
+    return UnknownFailure('Erro inesperado: ${exception.toString()}');
   }
 }

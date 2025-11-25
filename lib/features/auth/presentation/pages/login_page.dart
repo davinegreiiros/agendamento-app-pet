@@ -2,6 +2,7 @@
 import 'package:agendamento_pet_app/core/constants/app_constants.dart';
 import 'package:agendamento_pet_app/core/validators/validators.dart';
 import 'package:agendamento_pet_app/features/auth/presentation/bloc/auth_bloc.dart';
+import 'package:agendamento_pet_app/features/auth/presentation/bloc/auth_event.dart';
 import 'package:agendamento_pet_app/features/auth/presentation/bloc/auth_state.dart';
 import 'package:agendamento_pet_app/features/auth/presentation/widgets/auth_scaffold.dart';
 import 'package:agendamento_pet_app/features/auth/presentation/widgets/custom_text_field.dart';
@@ -105,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
             child: Icon(
               Icons.pets,
               size: 36,
-              color: AppColors.textPrimaryWithOpacity(0.85),
+              color: AppColors.textPrimary.withOpacity(0.85),
             ),
           ),
           const SizedBox(height: AppSpacing.sm),

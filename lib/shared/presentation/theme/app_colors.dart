@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class AppColors {
   // Cores principais
   static const Color primary = Color(0xFF2F4A46); // verde escuro
+  static const Color primaryDark = Color(0xFF1F3330); // verde mais escuro
   static const Color primaryLight = Color(0xFFBFE9E5); // mint/verde claro
   static const Color primaryLighter = Color(0xFFC4E8E3);
   static const Color accent = Color(0xFFA5D9D3);
@@ -58,7 +59,7 @@ class AppColors {
   // Sombras
   static List<BoxShadow> get defaultShadow => [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.08),
+          color: Colors.black.withOpacity(0.08),
           blurRadius: 18,
           offset: const Offset(0, 10),
           spreadRadius: 1,
@@ -67,7 +68,7 @@ class AppColors {
 
   static List<BoxShadow> get lightShadow => [
         BoxShadow(
-          color: Colors.black.withValues(alpha: 0.04),
+          color: Colors.black.withOpacity(0.04),
           blurRadius: 8,
           offset: const Offset(0, 4),
           spreadRadius: 0,

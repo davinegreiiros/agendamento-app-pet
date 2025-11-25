@@ -1,75 +1,13 @@
-// ignore: prefer_relative_imports
 import 'package:flutter_bloc/flutter_bloc.dart';
-// ignore: prefer_relative_imports
 import 'package:agendamento_pet_app/features/auth/domain/usecases/get_current_user.dart';
-// ignore: prefer_relative_imports
-import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_in_with_email.dart';
-// ignore: prefer_relative_imports
-import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_in_with_facebook.dart';
-// ignore: prefer_relative_imports
-import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_in_with_google.dart';
-// ignore: prefer_relative_imports
-import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_out.dart';
-// ignore: prefer_relative_imports
-import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_up.dart';
-// ignore: prefer_relative_imports
 import 'package:agendamento_pet_app/features/auth/domain/usecases/reset_password.dart';
-// ignore: prefer_relative_imports
+import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_in_with_email.dart';
+import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_in_with_facebook.dart';
+import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_in_with_google.dart';
+import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_out.dart';
+import 'package:agendamento_pet_app/features/auth/domain/usecases/sign_up.dart';
+import 'package:agendamento_pet_app/features/auth/presentation/bloc/auth_event.dart';
 import 'package:agendamento_pet_app/features/auth/presentation/bloc/auth_state.dart';
-
-abstract class AuthEvent {
-  const AuthEvent();
-}
-
-class AuthStarted extends AuthEvent {
-  const AuthStarted();
-}
-
-class SignInWithEmailRequested extends AuthEvent {
-  const SignInWithEmailRequested({
-    required this.email,
-    required this.password,
-  });
-
-  final String email;
-  final String password;
-
-  List<Object> get props => [email, password];
-}
-
-class SignInWithGoogleRequested extends AuthEvent {
-  const SignInWithGoogleRequested();
-}
-
-class SignInWithFacebookRequested extends AuthEvent {
-  const SignInWithFacebookRequested();
-}
-
-class SignUpRequested extends AuthEvent {
-  const SignUpRequested({
-    required this.name,
-    required this.email,
-    required this.password,
-  });
-
-  final String name;
-  final String email;
-  final String password;
-
-  List<Object> get props => [name, email, password];
-}
-
-class SignOutRequested extends AuthEvent {
-  const SignOutRequested();
-}
-
-class ResetPasswordRequested extends AuthEvent {
-  const ResetPasswordRequested(this.email);
-
-  final String email;
-
-  List<Object> get props => [email];
-}
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({
