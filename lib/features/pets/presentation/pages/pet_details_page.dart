@@ -110,13 +110,40 @@ class _PetDetailsPageState extends State<PetDetailsPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 60),
-                    CircleAvatar(
-                      radius: 70,
-                      backgroundColor: Colors.white.withOpacity(0.3),
-                      child: const Icon(
-                        Icons.pets,
-                        size: 80,
-                        color: Colors.white,
+                    Container(
+                      width: 140,
+                      height: 140,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: Colors.white.withOpacity(0.3),
+                          width: 4,
+                        ),
+                      ),
+                      child: ClipOval(
+                        child: pet.imageUrl != null
+                            ? Image.asset(
+                                pet.imageUrl!,
+                                width: 140,
+                                height: 140,
+                                fit: BoxFit.cover,
+                                errorBuilder: (_, __, ___) => ColoredBox(
+                                  color: Colors.white.withOpacity(0.2),
+                                  child: const Icon(
+                                    Icons.pets,
+                                    size: 80,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            : ColoredBox(
+                                color: Colors.white.withOpacity(0.2),
+                                child: const Icon(
+                                  Icons.pets,
+                                  size: 80,
+                                  color: Colors.white,
+                                ),
+                              ),
                       ),
                     ),
                     const SizedBox(height: AppSpacing.md),

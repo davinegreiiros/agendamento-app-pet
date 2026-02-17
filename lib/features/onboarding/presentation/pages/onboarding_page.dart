@@ -152,124 +152,125 @@ class _OnboardingSlide extends StatelessWidget {
 
         const SizedBox(height: 18),
 
-        // Card branco com conteúdo — AGORA ROLÁVEL
-        Flexible(
-          child: SingleChildScrollView(
-            padding: EdgeInsets.zero,
-            physics: const BouncingScrollPhysics(),
-            child: Container(
-              width: double.infinity,
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              padding: const EdgeInsets.all(28),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Indicador com patinha
-                  Container(
-                    width: 50,
-                    height: 52,
-                    decoration: const BoxDecoration(
-                      color: Color(0xFFB8E5E5),
-                      shape: BoxShape.circle,
+        // Card branco com conteúdo
+        Expanded(
+          child: Center(
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(vertical: 8),
+              physics: const BouncingScrollPhysics(),
+              child: Container(
+                width: double.infinity,
+                margin: const EdgeInsets.symmetric(horizontal: 20),
+                padding: const EdgeInsets.all(28),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Indicador com patinha
+                    Container(
+                      width: 50,
+                      height: 52,
+                      decoration: const BoxDecoration(
+                        color: Color(0xFFB8E5E5),
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.pets,
+                        color: Colors.black,
+                        size: 34,
+                      ),
                     ),
-                    child: const Icon(
-                      Icons.pets,
-                      color: Colors.black,
-                      size: 34,
+
+                    const SizedBox(height: 12),
+
+                    // Título
+                    Text(
+                      data.title,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                        height: 1.2,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 12),
+                    const SizedBox(height: 12),
 
-                  // Título
-                  Text(
-                    data.title,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                      height: 1.2,
+                    // Descrição
+                    Text(
+                      data.description,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 13,
+                        color: Colors.grey[600],
+                        height: 1.4,
+                      ),
                     ),
-                  ),
 
-                  const SizedBox(height: 12),
+                    const SizedBox(height: 20),
 
-                  // Descrição
-                  Text(
-                    data.description,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey[600],
-                      height: 1.4,
-                    ),
-                  ),
-
-                  const SizedBox(height: 20),
-
-                  // Botão Next
-                  SizedBox(
-                    width: double.infinity,
-                    height: 58,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        final parent = context
-                            .findAncestorStateOfType<_OnboardingPageState>();
-                        if (data.number < 3) {
-                          parent?._nextPage();
-                        } else {
-                          Navigator.of(context)
-                              .pushReplacementNamed(AppRoutes.login);
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFB8E5E5),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                    // Botão Next
+                    SizedBox(
+                      width: double.infinity,
+                      height: 58,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          final parent = context
+                              .findAncestorStateOfType<_OnboardingPageState>();
+                          if (data.number < 3) {
+                            parent?._nextPage();
+                          } else {
+                            Navigator.of(context)
+                                .pushReplacementNamed(AppRoutes.login);
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFFB8E5E5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          elevation: 1,
                         ),
-                        elevation: 1,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Next',
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w600,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Continuar',
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 17,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                          ),
-                          const SizedBox(width: 10),
-                          Container(
-                            width: 40,
-                            height: 40,
-                            decoration: const BoxDecoration(
-                              color: Colors.black,
-                              shape: BoxShape.circle,
+                            const SizedBox(width: 10),
+                            Container(
+                              width: 40,
+                              height: 40,
+                              decoration: const BoxDecoration(
+                                color: Colors.black,
+                                shape: BoxShape.circle,
+                              ),
+                              child: const Icon(
+                                Icons.pets,
+                                color: Color(0xFFB8E5E5),
+                                size: 24,
+                              ),
                             ),
-                            child: const Icon(
-                              Icons.pets,
-                              color: Color(0xFFB8E5E5),
-                              size: 24,
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+
+                  ],
+                ),
               ),
             ),
           ),
         ),
-
-        const SizedBox(height: 18),
       ],
     );
   }

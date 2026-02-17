@@ -37,8 +37,8 @@ class _LoginPageState extends State<LoginPage> {
     context.read<AuthBloc>().add(const SignInWithGoogleRequested());
   }
 
-  void _handleFacebookSignIn(BuildContext context) {
-    context.read<AuthBloc>().add(const SignInWithFacebookRequested());
+  void _handleAppleSignIn(BuildContext context) {
+    // TODO(davii): implementar login com Apple
   }
 
   void _handleEmailSignIn(BuildContext context) {
@@ -122,15 +122,60 @@ class _LoginPageState extends State<LoginPage> {
         ],
       );
 
-  Widget _buildSocialButtons(BuildContext context) => Column(
+  Widget _buildSocialButtons(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          GoogleSignInExtendedButton(
-            onPressed: () => _handleGoogleSignIn(context),
+          // Google
+          GestureDetector(
+            onTap: () => _handleGoogleSignIn(context),
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey[300]!),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Center(
+                child: Text(
+                  'G',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    foreground: Paint()
+                      ..shader = const LinearGradient(
+                        colors: [
+                          Color(0xFF4285F4),
+                          Color(0xFF34A853),
+                          Color(0xFFFBBC05),
+                          Color(0xFFEA4335),
+                        ],
+                      ).createShader(
+                        const Rect.fromLTWH(0, 0, 24, 24),
+                      ),
+                  ),
+                ),
+              ),
+            ),
           ),
-          const SizedBox(height: AppSpacing.md),
-          FacebookSignInExtendedButton(
-            onPressed: () => _handleFacebookSignIn(context),
-            backgroundColor: AppColors.primaryLight,
+          const SizedBox(width: 16),
+          // Apple
+          GestureDetector(
+            onTap: () => _handleAppleSignIn(context),
+            child: Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey[300]!),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.apple,
+                  size: 28,
+                  color: Colors.black,
+                ),
+              ),
+            ),
           ),
         ],
       );
@@ -141,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
             child: Text(
-              'Acessar via',
+              'Acessar com conta',
               style: AppTextStyles.titleMedium.copyWith(
                 color: AppColors.primary,
                 fontWeight: FontWeight.w700,
