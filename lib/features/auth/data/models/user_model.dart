@@ -1,13 +1,13 @@
 import 'package:agendamento_pet_app/features/auth/domain/entities/user.dart';
 
-class UserModel extends User {
+class UserModel {
   const UserModel({
-    required super.id,
-    required super.name,
-    required super.email,
-    required super.createdAt,
-    required super.updatedAt,
-    super.profileImageUrl,
+    required this.id,
+    required this.name,
+    required this.email,
+    required this.createdAt,
+    required this.updatedAt,
+    this.profileImageUrl,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
@@ -26,6 +26,22 @@ class UserModel extends User {
         createdAt: user.createdAt,
         updatedAt: user.updatedAt,
         profileImageUrl: user.profileImageUrl,
+      );
+
+  final String id;
+  final String name;
+  final String email;
+  final String? profileImageUrl;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  User toEntity() => User(
+        id: id,
+        name: name,
+        email: email,
+        profileImageUrl: profileImageUrl,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
       );
 
   Map<String, dynamic> toJson() => {

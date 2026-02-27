@@ -1,16 +1,16 @@
-import 'package:agendamento_pet_app/features/auth/domain/entities/user.dart';
+import 'package:agendamento_pet_app/features/auth/data/models/user_model.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<User> signInWithEmail({
+  Future<UserModel> signInWithEmail({
     required String email,
     required String password,
   });
 
-  Future<User> signInWithGoogle();
+  Future<UserModel> signInWithGoogle();
 
-  Future<User> signInWithFacebook();
+  Future<UserModel> signInWithFacebook();
 
-  Future<User> signUp({
+  Future<UserModel> signUp({
     required String name,
     required String email,
     required String password,
@@ -18,7 +18,7 @@ abstract class AuthRemoteDataSource {
 
   Future<void> signOut();
 
-  Future<User?> getCurrentUser();
+  Future<UserModel?> getCurrentUser();
 
   Future<void> resetPassword({
     required String email,
@@ -27,7 +27,7 @@ abstract class AuthRemoteDataSource {
 
 class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   @override
-  Future<User> signInWithEmail({
+  Future<UserModel> signInWithEmail({
     required String email,
     required String password,
   }) async {
@@ -37,7 +37,7 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
       throw Exception('Credenciais inválidas');
     }
 
-    return User(
+    return UserModel(
       id: '1',
       name: 'Davi Negreiros',
       email: email,
@@ -47,9 +47,9 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<User> signInWithGoogle() async {
+  Future<UserModel> signInWithGoogle() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    return User(
+    return UserModel(
       id: '2',
       name: 'Usuário Google',
       email: 'user@gmail.com',
@@ -59,9 +59,9 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<User> signInWithFacebook() async {
+  Future<UserModel> signInWithFacebook() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    return User(
+    return UserModel(
       id: '3',
       name: 'Usuário Facebook',
       email: 'user@facebook.com',
@@ -71,13 +71,13 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<User> signUp({
+  Future<UserModel> signUp({
     required String name,
     required String email,
     required String password,
   }) async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    return User(
+    return UserModel(
       id: '4',
       name: name,
       email: email,
@@ -92,7 +92,7 @@ class MockAuthRemoteDataSource implements AuthRemoteDataSource {
   }
 
   @override
-  Future<User?> getCurrentUser() async {
+  Future<UserModel?> getCurrentUser() async {
     await Future<void>.delayed(const Duration(milliseconds: 500));
     return null;
   }

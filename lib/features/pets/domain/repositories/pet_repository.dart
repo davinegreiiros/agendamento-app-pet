@@ -1,9 +1,6 @@
-// ignore: prefer_relative_imports
-import 'package:dartz/dartz.dart';
-// ignore: prefer_relative_imports
-import 'package:agendamento_pet_app/shared/errors/failures.dart';
-// ignore: prefer_relative_imports
+import 'package:agendamento_pet_app/core/errors/failures.dart';
 import 'package:agendamento_pet_app/features/pets/domain/entities/pet.dart';
+import 'package:dartz/dartz.dart';
 
 abstract class PetRepository {
   Future<Either<Failure, List<Pet>>> getPetsByOwner(String ownerId);

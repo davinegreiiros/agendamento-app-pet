@@ -1,5 +1,7 @@
 import 'package:agendamento_pet_app/core/di/dependency_injection.dart';
+import 'package:agendamento_pet_app/features/auth/presentation/pages/forgot_password_page.dart';
 import 'package:agendamento_pet_app/features/auth/presentation/pages/login_page.dart';
+import 'package:agendamento_pet_app/features/auth/presentation/pages/register_page.dart';
 import 'package:agendamento_pet_app/features/onboarding/presentation/pages/onboarding_page.dart';
 import 'package:agendamento_pet_app/main_navigation.dart';
 import 'package:agendamento_pet_app/shared/constants/app_routes.dart';
@@ -17,6 +19,8 @@ class PetApp extends StatelessWidget {
           routes: {
             AppRoutes.onboarding: (_) => const OnboardingPage(),
             AppRoutes.login: (_) => const LoginPage(),
+            AppRoutes.register: (_) => const RegisterPage(),
+            AppRoutes.forgotPassword: (_) => const ForgotPasswordPage(),
             AppRoutes.main: (_) => const MainNavigation(),
           },
         ),

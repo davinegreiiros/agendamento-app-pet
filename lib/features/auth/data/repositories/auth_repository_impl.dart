@@ -1,12 +1,9 @@
-// ignore_for_file: prefer_relative_imports, directives_ordering
-
-import 'package:agendamento_pet_app/features/auth/domain/entities/user.dart';
-import 'package:agendamento_pet_app/shared/errors/failures.dart';
-import 'package:dartz/dartz.dart';
-
-import 'package:agendamento_pet_app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:agendamento_pet_app/core/errors/failures.dart';
 import 'package:agendamento_pet_app/features/auth/data/datasources/auth_local_datasource.dart';
 import 'package:agendamento_pet_app/features/auth/data/datasources/auth_remote_datasource.dart';
+import 'package:agendamento_pet_app/features/auth/domain/entities/user.dart';
+import 'package:agendamento_pet_app/features/auth/domain/repositories/auth_repository.dart';
+import 'package:dartz/dartz.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
   const AuthRepositoryImpl({
@@ -23,13 +20,13 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     try {
-      final user = await remoteDataSource.signInWithEmail(
+      final userModel = await remoteDataSource.signInWithEmail(
         email: email,
         password: password,
       );
-      await localDataSource.cacheUser(user);
-      return Right(user);
-    } catch (e) {
+      await localDataSource.cacheUser(userModel);
+      return Right(userModel.toEntity());
+    } on Exception catch (e) {
       return Left(AuthFailure(e.toString()));
     }
   }
@@ -37,10 +34,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, User>> signInWithGoogle() async {
     try {
-      final user = await remoteDataSource.signInWithGoogle();
-      await localDataSource.cacheUser(user);
-      return Right(user);
-    } catch (e) {
+      final userModel = await remoteDataSource.signInWithGoogle();
+      await localDataSource.cacheUser(userModel);
+      return Right(userModel.toEntity());
+    } on Exception catch (e) {
       return Left(AuthFailure(e.toString()));
     }
   }
@@ -48,10 +45,10 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, User>> signInWithFacebook() async {
     try {
-      final user = await remoteDataSource.signInWithFacebook();
-      await localDataSource.cacheUser(user);
-      return Right(user);
-    } catch (e) {
+      final userModel = await remoteDataSource.signInWithFacebook();
+      await localDataSource.cacheUser(userModel);
+      return Right(userModel.toEntity());
+    } on Exception catch (e) {
       return Left(AuthFailure(e.toString()));
     }
   }
@@ -63,14 +60,14 @@ class AuthRepositoryImpl implements AuthRepository {
     required String password,
   }) async {
     try {
-      final user = await remoteDataSource.signUp(
+      final userModel = await remoteDataSource.signUp(
         name: name,
         email: email,
         password: password,
       );
-      await localDataSource.cacheUser(user);
-      return Right(user);
-    } catch (e) {
+      await localDataSource.cacheUser(userModel);
+      return Right(userModel.toEntity());
+    } on Exception catch (e) {
       return Left(AuthFailure(e.toString()));
     }
   }
@@ -81,7 +78,7 @@ class AuthRepositoryImpl implements AuthRepository {
       await remoteDataSource.signOut();
       await localDataSource.clearCache();
       return const Right(null);
-    } catch (e) {
+    } on Exception catch (e) {
       return Left(AuthFailure(e.toString()));
     }
   }
@@ -89,17 +86,17 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Either<Failure, User?>> getCurrentUser() async {
     try {
-      final cachedUser = await localDataSource.getCachedUser();
-      if (cachedUser != null) {
-        return Right(cachedUser);
+      final cachedModel = await localDataSource.getCachedUser();
+      if (cachedModel != null) {
+        return Right(cachedModel.toEntity());
       }
 
-      final user = await remoteDataSource.getCurrentUser();
-      if (user != null) {
-        await localDataSource.cacheUser(user);
+      final userModel = await remoteDataSource.getCurrentUser();
+      if (userModel != null) {
+        await localDataSource.cacheUser(userModel);
       }
-      return Right(user);
-    } catch (e) {
+      return Right(userModel?.toEntity());
+    } on Exception catch (e) {
       return Left(AuthFailure(e.toString()));
     }
   }
@@ -111,7 +108,7 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       await remoteDataSource.resetPassword(email: email);
       return const Right(null);
-    } catch (e) {
+    } on Exception catch (e) {
       return Left(AuthFailure(e.toString()));
     }
   }

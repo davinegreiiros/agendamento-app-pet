@@ -1,203 +1,237 @@
 # Agenda Pet Saúde
 
-Um aplicativo Flutter para agendamento e cuidados de pets, desenvolvido seguindo os princípios de **Clean Architecture** e **Clean Code**.
+Aplicativo Flutter para agendamento e cuidados de pets, desenvolvido com **Clean Architecture**, **BLoC** e **Clean Code**.
 
-## 🏗️ Arquitetura
+---
 
-O projeto segue os princípios da **Clean Architecture** com separação clara de responsabilidades:
+## Arquitetura
 
+O projeto segue Clean Architecture com separação estrita entre camadas. Cada feature é organizada em três camadas independentes:
 
-```
-├── 📁 lib/
-│   ├── 📁 core/ # Código compartilhado
-│   │   ├── 📁 constants/                 # Constantes da aplicação
-│   │   │   └── 🔵 app_constants.dart
-│   │   ├── 📁 di/                        # Injeção de dependências
-│   │   │   └── 🔵 dependency_injection.dart
-│   │   ├── 📁 theme/
-│   │   │   ├── 🔵 app_theme.dart
-│   │   │   └── 🔵 pet_theme.dart
-│   │   └── 📁 validators/                # Validações centralizadas
-│   │       └── 🔵 validators.dart
-│   ├── 📁 features/  # Features da aplicação
-│   │   ├── 📁 auth/
-│   │   │   ├── 📁 data/  # Camada de dados
-│   │   │   │   ├── 📁 datasources/       # Fontes de dados (API, Local)
-│   │   │   │   │   ├── 🔵 auth_local_datasource.dart
-│   │   │   │   │   └── 🔵 auth_remote_datasource.dart
-│   │   │   │   └── 📁 repositories/      # Implementação dos repositories
-│   │   │   │       └── 🔵 auth_repository_impl.dart
-│   │   │   ├── 📁 domain/
-│   │   │   │   ├── 📁 entities/
-│   │   │   │   │   └── 🔵 user.dart
-│   │   │   │   ├── 📁 repositories/
-│   │   │   │   │   └── 🔵 auth_repository.dart
-│   │   │   │   └── 📁 usecases/          # Casos de uso
-│   │   │   │       ├── 🔵 get_current_user.dart
-│   │   │   │       ├── 🔵 reset_password.dart
-│   │   │   │       ├── 🔵 sign_in_with_email.dart
-│   │   │   │       ├── 🔵 sign_in_with_facebook.dart
-│   │   │   │       ├── 🔵 sign_in_with_google.dart
-│   │   │   │       ├── 🔵 sign_out.dart
-│   │   │   │       └── 🔵 sign_up.dart
-│   │   │   └── 📁 presentation/          # Camada de apresentação
-│   │   │       ├── 📁 bloc/
-│   │   │       │   ├── 🔵 auth_bloc.dart
-│   │   │       │   └── 🔵 auth_state.dart
-│   │   │       ├── 📁 pages/
-│   │   │       │   └── 🔵 login_page.dart
-│   │   │       └── 📁 widgets/
-│   │   │           ├── 🔵 auth_scaffold.dart
-│   │   │           └── 🔵 custom_text_field.dart
-│   │   └── 📁 pets/  # Feature de pets
-│   │       └── 📁 domain/                # Camada de domínio
-│   │           ├── 📁 entities/
-│   │           │   └── 🔵 pet.dart
-│   │           ├── 📁 repositories/
-│   │           │   └── 🔵 pet_repository.dart
-│   │           └── 📁 usecases/
-│   │               ├── 🔵 create_pet.dart
-│   │               └── 🔵 get_pets_by_owner.dart
-│   ├── 📁 pet_flow/                     # Fluxo principal da aplicação
-│   │   ├── 📁 account/
-│   │   │   └── 🔵 account_page.dart
-│   │   ├── 📁 auth/
-│   │   │   └── 🔵 login_page.dart
-│   │   ├── 📁 core_widgets/
-│   │   │   ├── 🔵 pet_buttons.dart
-│   │   │   ├── 🔵 pet_header_skip.dart
-│   │   │   ├── 🔵 pet_page_indicator.dart
-│   │   │   └── 🔵 pet_scaffold.dart
-│   │   ├── 📁 home/
-│   │   │   └── 🔵 home_page.dart
-│   │   ├── 📁 onboarding/
-│   │   │   └── 🔵 onboarding_page.dart
-│   │   └── 📁 pet_details/
-│   │       └── 🔵 pet_details_page.dart
-│   ├── 📁 shared/
-│   │   ├── 📁 constants/
-│   │   │   └── 🔵 app_routes.dart
-│   │   ├── 📁 errors/
-│   │   │   └── 🔵 failures.dart
-│   │   └── 📁 presentation/             # Widgets e temas compartilhados
-│   │       ├── 📁 theme/
-│   │       │   ├── 🔵 app_colors.dart
-│   │       │   └── 🔵 app_theme.dart
-│   │       └── 📁 widgets/
-│   │           ├── 📁 buttons/
-│   │           │   ├── 🔵 facebook_buttons.dart
-│   │           │   ├── 🔵 google_buttons.dart
-│   │           │   ├── 🔵 index.dart
-│   │           │   ├── 🔵 social_button_base.dart
-│   │           │   └── 🔵 social_buttons_row.dart
-│   │           ├── 📁 examples/
-│   │           │   ├── 🔵 button_test.dart
-│   │           │   └── 🔵 social_buttons_example.dart
-│   │           ├── 🔵 components_showcase.dart
-│   │           └── 🔵 custom_buttons.dart
-│   ├── 🔵 main.dart
-│   ├── 🔵 main_navigation.dart
-│   └── 🔵 pet_app.dart
-
+```text
+feature/
+├── data/          → datasources, models, repository impl
+├── domain/        → entities, repository contracts, use cases
+└── presentation/  → BLoC, pages, widgets
 ```
 
-## 🎯 Princípios Aplicados
+### Princípios arquiteturais aplicados
 
-### Clean Architecture
-- **Separação de responsabilidades**: Cada camada tem uma responsabilidade específica
-- **Inversão de dependência**: Camadas internas não dependem das externas
-- **Independência de frameworks**: O código de negócio não depende do Flutter
+| Princípio | Implementação |
+| --- | --- |
+| **Inversão de dependência** | `domain` não conhece `data` — define apenas contratos (abstrações) |
+| **Composição sobre herança** | `UserModel` e `PetModel` são classes independentes com `toEntity()` — não herdam das entidades |
+| **Isolamento da camada de dados** | Datasources trafegam apenas `*Model`; o repositório faz a tradução `Model → Entity` na borda |
+| **Erros centralizados** | `Failure` e subclasses vivem em `core/errors/failures.dart` |
+| **Roteamento declarativo** | Todas as rotas registradas em `AppRoutes` e no `MaterialApp` |
 
-### Clean Code
-- **Nomes descritivos**: Variáveis, funções e classes com nomes claros
-- **Funções pequenas**: Cada função tem uma única responsabilidade
-- **Comentários quando necessário**: Código autoexplicativo
-- **Constantes centralizadas**: Cores, espaçamentos e estilos em arquivos dedicados
+---
 
-### SOLID Principles
-- **Single Responsibility**: Cada classe tem uma única responsabilidade
-- **Open/Closed**: Aberto para extensão, fechado para modificação
-- **Liskov Substitution**: Substituição de implementações sem quebrar o código
-- **Interface Segregation**: Interfaces específicas para cada necessidade
-- **Dependency Inversion**: Dependência de abstrações, não de implementações
+## Estrutura de pastas
 
-## 🛠️ Tecnologias Utilizadas
+```text
+lib/
+├── core/
+│   ├── constants/
+│   │   └── app_constants.dart
+│   ├── di/
+│   │   └── dependency_injection.dart       # Composição de BLoCs, repositórios e datasources
+│   ├── errors/
+│   │   └── failures.dart                   # Failure, AuthFailure, NetworkFailure, etc.
+│   └── validators/
+│       └── validators.dart
+│
+├── features/
+│   ├── auth/
+│   │   ├── data/
+│   │   │   ├── datasources/
+│   │   │   │   ├── auth_local_datasource.dart   # Contrato + Mock (UserModel)
+│   │   │   │   └── auth_remote_datasource.dart  # Contrato + Mock (UserModel)
+│   │   │   ├── models/
+│   │   │   │   └── user_model.dart              # Composição — toEntity() / fromEntity()
+│   │   │   └── repositories/
+│   │   │       └── auth_repository_impl.dart    # Traduz UserModel → User na borda
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   │   └── user.dart
+│   │   │   ├── repositories/
+│   │   │   │   └── auth_repository.dart         # Contrato abstrato
+│   │   │   └── usecases/
+│   │   │       ├── get_current_user.dart
+│   │   │       ├── reset_password.dart
+│   │   │       ├── sign_in_with_email.dart
+│   │   │       ├── sign_in_with_facebook.dart
+│   │   │       ├── sign_in_with_google.dart
+│   │   │       ├── sign_out.dart
+│   │   │       └── sign_up.dart
+│   │   └── presentation/
+│   │       ├── bloc/
+│   │       │   ├── auth_bloc.dart
+│   │       │   ├── auth_event.dart
+│   │       │   └── auth_state.dart
+│   │       ├── pages/
+│   │       │   ├── login_page.dart
+│   │       │   ├── register_page.dart
+│   │       │   └── forgot_password_page.dart
+│   │       └── widgets/
+│   │           ├── auth_scaffold.dart
+│   │           └── custom_text_field.dart
+│   │
+│   ├── pets/
+│   │   ├── data/
+│   │   │   ├── datasources/
+│   │   │   │   ├── pet_local_datasource.dart    # Contrato + Mock (PetModel)
+│   │   │   │   └── pet_remote_datasource.dart   # Contrato + Mock (PetModel)
+│   │   │   ├── models/
+│   │   │   │   └── pet_model.dart               # Composição — toEntity() / fromEntity()
+│   │   │   └── repositories/
+│   │   │       └── pet_repository_impl.dart     # Traduz PetModel → Pet na borda
+│   │   ├── domain/
+│   │   │   ├── entities/
+│   │   │   │   └── pet.dart
+│   │   │   ├── repositories/
+│   │   │   │   └── pet_repository.dart          # Contrato abstrato
+│   │   │   └── usecases/
+│   │   │       ├── create_pet.dart
+│   │   │       ├── delete_pet.dart
+│   │   │       ├── get_pet_by_id.dart
+│   │   │       ├── get_pets_by_owner.dart
+│   │   │       └── update_pet.dart
+│   │   └── presentation/
+│   │       ├── bloc/
+│   │       │   ├── pet_bloc.dart
+│   │       │   ├── pet_event.dart
+│   │       │   └── pet_state.dart
+│   │       └── pages/
+│   │           ├── pets_list_page.dart
+│   │           └── pet_details_page.dart
+│   │
+│   ├── home/
+│   │   └── presentation/pages/home_page.dart
+│   │
+│   ├── account/
+│   │   └── presentation/pages/account_page.dart
+│   │
+│   └── onboarding/
+│       └── presentation/pages/onboarding_page.dart
+│
+├── shared/
+│   ├── constants/
+│   │   └── app_routes.dart                      # Todas as rotas da aplicação
+│   ├── errors/
+│   │   └── failures.dart                        # Re-export de core/errors/failures.dart
+│   └── presentation/
+│       ├── theme/
+│       │   ├── app_colors.dart
+│       │   ├── app_text_styles.dart
+│       │   ├── app_spacing.dart
+│       │   └── app_border_radius.dart
+│       └── widgets/
+│           └── buttons/
+│               ├── primary_button.dart
+│               ├── secondary_button.dart
+│               ├── social_button_base.dart
+│               ├── social_buttons_row.dart
+│               ├── google_buttons.dart
+│               ├── facebook_buttons.dart
+│               └── index.dart
+│
+├── main.dart
+├── main_navigation.dart
+└── pet_app.dart                                 # Composição de rotas e providers
+```
 
-- **Flutter**: Framework de desenvolvimento
-- **BLoC**: Gerenciamento de estado
-- **Dartz**: Programação funcional (Either, Option)
-- **Equatable**: Comparação de objetos
-- **Google Fonts**: Tipografia
-- **Flutter SVG**: Ícones SVG
+---
 
-## 📱 Features Implementadas
+## Fluxo de dados
 
-### ✅ Autenticação
-- Login com email e senha
-- Login social (Google, Facebook)
+```text
+Presentation  →  UseCase  →  Repository (contrato)
+                                    ↓
+                             RepositoryImpl
+                            ↙            ↘
+               RemoteDataSource     LocalDataSource
+               (retorna Model)      (retorna Model)
+                            ↘            ↙
+                         .toEntity()  ← tradução aqui
+                                ↓
+                           Entity → Presentation
+```
+
+---
+
+## Tecnologias
+
+| Pacote | Uso |
+| --- | --- |
+| `flutter_bloc` | Gerenciamento de estado |
+| `dartz` | Programação funcional (`Either<Failure, T>`) |
+| `equatable` | Comparação de entidades e estados |
+| `google_fonts` | Tipografia |
+| `flutter_svg` | Ícones SVG |
+
+---
+
+## Features implementadas
+
+### Onboarding
+
+- Tela de boas-vindas com apresentação do app
+
+### Autenticação
+
+- Login com e-mail e senha
+- Login social (Google, Apple)
 - Cadastro de usuário
 - Recuperação de senha
 - Logout
 
-### ✅ Gerenciamento de Estado
-- BLoc para autenticação
-- Estados reativos
-- Tratamento de erros
+### Pets
 
-### ✅ UI/UX
-- Design system consistente
-- Cores e espaçamentos padronizados
-- Validações centralizadas
-- Feedback visual para o usuário
+- Listagem de pets por dono
+- Detalhes do pet (raça, idade, tipo, gênero)
+- CRUD completo via BLoC (create, read, update, delete)
+- Cache local via datasource
 
-## 🚀 Como Executar
+### Navegação
 
-1. Clone o repositório
-2. Instale as dependências:
-   ```bash
-   flutter pub get
-   ```
-3. Execute o aplicativo:
-   ```bash
-   flutter run
-   ```
+- Bottom navigation bar (Home, Pets, Agenda, Conta)
+- Roteamento declarativo com `AppRoutes`
 
-## 📋 Próximos Passos
+---
 
-- [ ] Implementar feature de pets completa
-- [ ] Adicionar testes unitários
-- [ ] Implementar testes de integração
-- [ ] Adicionar persistência local (Hive/SQLite)
-- [ ] Implementar API real
-- [ ] Adicionar feature de agendamentos
-- [ ] Implementar notificações push
-
-## 🧪 Testes
+## Como executar
 
 ```bash
-# Executar todos os testes
+# Instalar dependências
+flutter pub get
+
+# Executar o app
+flutter run
+
+# Rodar testes
 flutter test
 
-# Executar testes com cobertura
+# Testes com cobertura
 flutter test --coverage
 ```
 
-## 📝 Convenções de Código
+---
 
-- **Nomenclatura**: camelCase para variáveis e métodos, PascalCase para classes
-- **Estrutura**: Um arquivo por classe
-- **Imports**: Ordenados alfabeticamente
-- **Documentação**: Dartdoc para APIs públicas
-- **Commits**: Conventional Commits
+## Próximos passos
 
-## 🤝 Contribuição
+- [ ] Telas de cadastro e recuperação de senha (UI)
+- [ ] Implementar datasources reais (Firebase / REST API)
+- [ ] Persistência local com Hive ou SQLite
+- [ ] Feature de agendamentos (CRUD + BLoC)
+- [ ] Testes unitários — use cases, repositórios, BLoCs
+- [ ] Notificações push
 
-1. Fork o projeto
-2. Crie uma branch para sua feature (`git checkout -b feature/AmazingFeature`)
-3. Commit suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-4. Push para a branch (`git push origin feature/AmazingFeature`)
-5. Abra um Pull Request
+---
 
-## 📄 Licença
+## Convenções
 
-Este projeto está sob a licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+- **Nomenclatura**: `camelCase` para variáveis/métodos, `PascalCase` para classes
+- **Commits**: Conventional Commits (`feat:`, `fix:`, `refactor:`, etc.)
+- **Um arquivo por classe**
+- **Imports**: sempre por pacote (`package:agendamento_pet_app/...`)

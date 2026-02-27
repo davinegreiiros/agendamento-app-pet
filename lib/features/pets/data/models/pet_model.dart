@@ -1,17 +1,17 @@
 import 'package:agendamento_pet_app/features/pets/domain/entities/pet.dart';
 
-class PetModel extends Pet {
+class PetModel {
   const PetModel({
-    required super.id,
-    required super.name,
-    required super.type,
-    required super.breed,
-    required super.gender,
-    required super.birthDate,
-    super.imageUrl,
-    required super.ownerId,
-    required super.createdAt,
-    required super.updatedAt,
+    required this.id,
+    required this.name,
+    required this.type,
+    required this.breed,
+    required this.gender,
+    required this.birthDate,
+    required this.ownerId,
+    required this.createdAt,
+    required this.updatedAt,
+    this.imageUrl,
   });
 
   factory PetModel.fromJson(Map<String, dynamic> json) => PetModel(
@@ -38,6 +38,30 @@ class PetModel extends Pet {
         ownerId: pet.ownerId,
         createdAt: pet.createdAt,
         updatedAt: pet.updatedAt,
+      );
+
+  final String id;
+  final String name;
+  final PetType type;
+  final String breed;
+  final PetGender gender;
+  final DateTime birthDate;
+  final String? imageUrl;
+  final String ownerId;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  Pet toEntity() => Pet(
+        id: id,
+        name: name,
+        type: type,
+        breed: breed,
+        gender: gender,
+        birthDate: birthDate,
+        imageUrl: imageUrl,
+        ownerId: ownerId,
+        createdAt: createdAt,
+        updatedAt: updatedAt,
       );
 
   Map<String, dynamic> toJson() => {

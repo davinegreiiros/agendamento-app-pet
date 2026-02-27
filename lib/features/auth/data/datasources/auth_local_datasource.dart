@@ -1,19 +1,19 @@
-import 'package:agendamento_pet_app/features/auth/domain/entities/user.dart';
+import 'package:agendamento_pet_app/features/auth/data/models/user_model.dart';
 
 abstract class AuthLocalDataSource {
-  Future<User?> getCachedUser();
-  Future<void> cacheUser(User user);
+  Future<UserModel?> getCachedUser();
+  Future<void> cacheUser(UserModel user);
   Future<void> clearCache();
 }
 
 class MockAuthLocalDataSource implements AuthLocalDataSource {
-  User? _cachedUser;
+  UserModel? _cachedUser;
 
   @override
-  Future<User?> getCachedUser() async => _cachedUser;
+  Future<UserModel?> getCachedUser() async => _cachedUser;
 
   @override
-  Future<void> cacheUser(User user) async {
+  Future<void> cacheUser(UserModel user) async {
     _cachedUser = user;
   }
 

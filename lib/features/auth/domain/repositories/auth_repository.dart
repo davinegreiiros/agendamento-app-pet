@@ -1,9 +1,6 @@
-// ignore: prefer_relative_imports
-import 'package:dartz/dartz.dart';
-// ignore: prefer_relative_imports
-import 'package:agendamento_pet_app/shared/errors/failures.dart';
-// ignore: prefer_relative_imports
+import 'package:agendamento_pet_app/core/errors/failures.dart';
 import 'package:agendamento_pet_app/features/auth/domain/entities/user.dart';
+import 'package:dartz/dartz.dart';
 
 abstract class AuthRepository {
   Future<Either<Failure, User>> signInWithEmail({
